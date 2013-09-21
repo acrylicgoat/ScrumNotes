@@ -1,0 +1,43 @@
+<resources>
+
+    <string name="app_name">Scrum Notes</string>
+    <string name="title_activity_main">Scrum Notes</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_event">Event</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_delete_dev">Delete Developer</string>
+    <string name="menu_everyone">Everyone</string>
+    <string name="menu_export">Export</string>
+    <string name="menu_import">Import</string>
+    <string name="mimetype_text">text/plain</string>
+    <string name="shared_via"> Shared via ScrumNotes.</string>
+    <string name="tell_friend">Tell a friend about </string>
+    <string name="no_data_msg">The note is empty, so nothing to share.</string>
+    <string name="today">Today: </string>
+    <string name="goal_title"><b>Scrum Notes - Goals</b></string>
+    <string name="dailynotes_title"><b>Scrum Notes - Daily Notes</b></string>
+    <string name="this_week">This Week\'s Goals: </string>
+    <string name="scrumnotes_data">Scrum Notes Data: </string>
+    <string name="team_goals"> team goals.</string>
+    <string name="main_insert">Yesterday: \n\nToday: </string>
+    <string name="no_devs">To get started, select Tools &#8212;> Developers and add some developers.</string>
+    <string name="no_yesterday">No data found for Yesterday.</string>
+    <string name="parking_lot_note">Scrum Parking Lot Note for </string>
+    <string name="meeting_notes"> meeting notes.</string>
+    <string name="parking_lot_note_heading">Parking Lot Note</string>
+    <string name="parking_lot_note_hint">Enter note here then use the share button to email to the team</string>
+    <string name="daily_notes_hint">Enter notes, announcements, etc.</string>
+    <string name="daily_notes">Daily Notes</string>
+    <string name="goals_hint">Enter team goals then use the share button to email them to the team.</string>
+    <string name="goals">This Week\'s Goals</string>
+    <string name="event_title_hint">Event Title</string>
+    <string name="event_desc_hint">Enter event description then use the share button to add it to your calendar</string>
+    <string name="add_developer_hint">Developer name</string>
+    <string name="developer_list">Developer List</string>
+    <string name="two_new_lines">\n\n</string>
+    <string name="nothing_to_save">Nothing to save.</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+
+</resources>

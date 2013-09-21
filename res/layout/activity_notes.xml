@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/purple"
+        android:text="@string/parking_lot_note_heading"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white_text" />
+
+    <EditText
+        android:id="@+id/editNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:editable="true"
+        android:hint="@string/parking_lot_note_hint"
+        android:ems="10"
+        android:gravity="top|left"
+        android:inputType="textCapSentences|textMultiLine"
+        android:lines="40"
+        android:singleLine="false" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

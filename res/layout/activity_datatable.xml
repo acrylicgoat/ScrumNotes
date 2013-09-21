@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical" android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+	<com.acrylicgoat.scrumnotes.layout.ScrollingTable
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	    <TableLayout 
+	        android:layout_height="wrap_content" 
+	        android:layout_width="match_parent" 
+	        android:id="@+id/HeaderTable" >
+	        <TableRow style="@style/HeaderRow">
+	            <TextView style="@style/HeaderText"
+	                android:text="@string/date" />
+	            <TextView style="@style/HeaderText"
+	                android:text="@string/name" />
+	            <TextView style="@style/HeaderText"
+	                android:text="@string/description" />
+	        </TableRow>
+	    </TableLayout>
+	    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/scrollView1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content">
+	    
+	        <TableLayout
+	            android:id="@+id/tablelayout"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:shrinkColumns="2" 
+	            android:stretchColumns="0,1">
+	        </TableLayout>
+	            
+	    </LinearLayout> 
+	        
+	    </ScrollView>
+    </com.acrylicgoat.scrumnotes.layout.ScrollingTable>
+ </LinearLayout>

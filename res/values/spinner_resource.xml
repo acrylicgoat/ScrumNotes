@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nav_list">
+        <item>Tools</item>
+        <item>Developers</item>
+        <item>Parking Lot Notes</item>
+        <item>Add Event</item>
+        <item>Daily Notes</item>
+        <item>Goals</item>
+        <item>Developer Report</item>
+        <item>Rate This App</item>
+    </string-array>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+	    <EditText
+	        android:id="@+id/devName"
+	        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:singleLine="true"
+            android:maxLines="1"
+	        android:layout_toLeftOf="@+id/devSave"
+            android:layout_gravity="fill_horizontal"
+	        android:layout_centerHorizontal="true"
+	        android:inputType="textCapSentences"
+            android:hint="@string/add_developer_hint" >
+	    </EditText>
+	
+	    <ImageButton
+	        android:id="@+id/devSave"
+	        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/devName"
+            android:layout_gravity="fill_horizontal"
+            android:layout_centerHorizontal="true"
+	        android:src="@drawable/save" />
+	
+	</RelativeLayout>
+	<TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple"
+        android:text="@string/developer_list"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white_text" />
+	<LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ListView
+            android:id="@+id/devsList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:fastScrollEnabled="true"
+            android:smoothScrollbar="true" />
+    </LinearLayout>
+
+</LinearLayout>

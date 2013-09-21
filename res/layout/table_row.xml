@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableRow1"
+    android:layout_weight="1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+     >
+        <TextView
+            android:id="@+id/date"
+            style="@style/BodyText"
+            android:text="@string/date" />
+        
+        <TextView
+            android:id="@+id/devName"
+            style="@style/BodyText"
+            android:text="@string/name" />
+        
+        <TextView
+            android:id="@+id/description"
+            style="@style/BodyText"
+            android:text="@string/description" />
+
+</TableRow>
