@@ -6,16 +6,16 @@
  */
 package com.acrylicgoat.scrumnotes;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -23,7 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity for capturing Parking Lot notes
  *
  */
-public class NotesActivity extends SherlockActivity
+public class NotesActivity extends Activity
 {
     ActionBar aBar;
     private EditText note;
@@ -33,21 +33,21 @@ public class NotesActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle(getString(R.string.app_name));
         note = (EditText) findViewById(R.id.editNotes);
         aBar.setDisplayHomeAsUpEnabled(true);
     }
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.menu.activity_notes, menu);
+        getMenuInflater().inflate(R.menu.activity_notes, menu);
         return true;
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == R.id.share)
         {

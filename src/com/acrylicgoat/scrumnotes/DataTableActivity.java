@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,6 +27,8 @@ import android.os.Environment;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -38,10 +42,6 @@ import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Developers;
 import com.acrylicgoat.scrumnotes.provider.Notes;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -49,7 +49,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity to display notes taken.  They can be filtered by developer
  *
  */
-public class DataTableActivity extends SherlockActivity
+public class DataTableActivity extends Activity
 {
     ArrayList<DevNote> notes;
     ArrayList<Developer> devs;
@@ -61,7 +61,7 @@ public class DataTableActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datatable);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Everyone");
         aBar.setDisplayHomeAsUpEnabled(true);
      // read database
@@ -115,7 +115,7 @@ public class DataTableActivity extends SherlockActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {
-        getSupportMenuInflater().inflate(R.menu.activity_devtable, menu);
+        getMenuInflater().inflate(R.menu.activity_devtable, menu);
         //getDevelopers();
         if(devs != null && devs.size() > 0)
         {
@@ -134,7 +134,7 @@ public class DataTableActivity extends SherlockActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         menu.clear();
-        getSupportMenuInflater().inflate(R.menu.activity_devtable, menu);
+        getMenuInflater().inflate(R.menu.activity_devtable, menu);
         getDevelopers();
         if(devs != null && devs.size() > 0)
         {
@@ -149,7 +149,7 @@ public class DataTableActivity extends SherlockActivity
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         String title = (String) item.getTitle();
         if(item.getItemId() == R.id.share)

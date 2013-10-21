@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Scrum Notes</string>
+    <string name="app_name">ScrumNotes</string>
     <string name="title_activity_main">Scrum Notes</string>
     <string name="menu_save">Save</string>
     <string name="menu_event">Event</string>

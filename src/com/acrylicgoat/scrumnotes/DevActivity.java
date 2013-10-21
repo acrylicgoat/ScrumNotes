@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
@@ -30,9 +33,6 @@ import com.acrylicgoat.scrumnotes.adapter.DevListAdapter;
 import com.acrylicgoat.scrumnotes.beans.Developer;
 import com.acrylicgoat.scrumnotes.provider.DBUtils;
 import com.acrylicgoat.scrumnotes.provider.Developers;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -40,7 +40,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity for adding Developers to app
  *
  */
-public class DevActivity extends SherlockActivity
+public class DevActivity extends Activity
 {
     ActionBar aBar;
     ArrayList<Developer> devs;
@@ -52,7 +52,7 @@ public class DevActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devs);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Developers");
         aBar.setDisplayHomeAsUpEnabled(true);
         //get devs from database
@@ -89,7 +89,7 @@ public class DevActivity extends SherlockActivity
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == android.R.id.home)
         {
@@ -151,7 +151,7 @@ public class DevActivity extends SherlockActivity
         devName.setOnKeyListener(new View.OnKeyListener()
         {
             
-            @Override
+            //@Override
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
                 if(event.getAction() == KeyEvent.ACTION_DOWN)

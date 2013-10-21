@@ -13,17 +13,16 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.acrylicgoat.scrumnotes.beans.Developer;
 import com.acrylicgoat.scrumnotes.provider.DBUtils;
 import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Developers;
 import com.acrylicgoat.scrumnotes.provider.Notes;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -53,7 +52,7 @@ import android.widget.TextView;
  * Opening activity for app
  *
  */
-public class MainActivity extends SherlockActivity 
+public class MainActivity extends Activity
 {
     private Cursor cursor;
     private EditText today;
@@ -80,7 +79,7 @@ public class MainActivity extends SherlockActivity
         {
         	currentOwner = sharedPref.getString("currentOwner", "");
         }
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle(getString(R.string.app_name));
         aBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         aBar.setDisplayHomeAsUpEnabled(false);
@@ -114,7 +113,7 @@ public class MainActivity extends SherlockActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {
-        getSupportMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         readDB();
         if(devs != null && devs.size() > 0)
         {
@@ -139,12 +138,12 @@ public class MainActivity extends SherlockActivity
         {
             mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.nav_list,android.R.layout.simple_spinner_dropdown_item);
         }
-        OnNavigationListener mOnNavigationListener = new OnNavigationListener() 
+        ActionBar.OnNavigationListener mOnNavigationListener = new ActionBar.OnNavigationListener()
         {
             // Get the same strings provided for the drop-down's ArrayAdapter
             String[] strings = getResources().getStringArray(R.array.nav_list);
 
-            @Override
+            //@Override
             public boolean onNavigationItemSelected(int position, long itemId) 
             {
               switch (position)
@@ -190,7 +189,7 @@ public class MainActivity extends SherlockActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         menu.clear();
-        getSupportMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         readDB();
         if(devs != null && devs.size() > 0)
         {
@@ -208,7 +207,7 @@ public class MainActivity extends SherlockActivity
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         String title = (String) item.getTitle();
         if(item.getItemId() == R.id.save)

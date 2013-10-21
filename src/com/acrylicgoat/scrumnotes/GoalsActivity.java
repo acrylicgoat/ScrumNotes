@@ -6,6 +6,7 @@
  */
 package com.acrylicgoat.scrumnotes;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -13,16 +14,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Goals;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -30,7 +29,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity for capturing team goals
  *
  */
-public class GoalsActivity extends SherlockActivity
+public class GoalsActivity extends Activity
 {
     private Cursor cursor;
     private EditText goals;
@@ -41,7 +40,7 @@ public class GoalsActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle(getString(R.string.goal_title));
         aBar.setDisplayHomeAsUpEnabled(true);
         goals = (EditText) findViewById(R.id.editGoals);
@@ -63,9 +62,9 @@ public class GoalsActivity extends SherlockActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.menu.activity_goals, menu);
+        getMenuInflater().inflate(R.menu.activity_goals, menu);
         
         return true;
     }
@@ -74,7 +73,7 @@ public class GoalsActivity extends SherlockActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         menu.clear();
-        getSupportMenuInflater().inflate(R.menu.activity_goals, menu);
+        getMenuInflater().inflate(R.menu.activity_goals, menu);
         
         return true;
     }
@@ -83,7 +82,7 @@ public class GoalsActivity extends SherlockActivity
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == R.id.save)
         {
