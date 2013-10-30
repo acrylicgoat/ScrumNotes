@@ -39,5 +39,7 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="date">Date</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drwaer Close</string>
 
 </resources>

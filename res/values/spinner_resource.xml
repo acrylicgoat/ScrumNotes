@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="nav_list">
-        <item>Tools</item>
+        <item>Home</item>
         <item>Developers</item>
         <item>Parking Lot Notes</item>
         <item>Add Event</item>
