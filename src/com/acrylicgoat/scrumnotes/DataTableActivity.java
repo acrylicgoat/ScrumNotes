@@ -18,10 +18,14 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.util.Linkify;
@@ -31,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +60,8 @@ public class DataTableActivity extends Activity
     ArrayList<Developer> devs;
     private static final int MENUITEM = Menu.FIRST;
     ActionBar aBar;
+    Context context;
+    String currentOwner;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -70,11 +77,13 @@ public class DataTableActivity extends Activity
         {
         	getDeveloperNotes(devs.get(0).getName());
         	aBar.setTitle("Scrum Notes - " + devs.get(0).getName());
+			currentOwner = devs.get(0).getName();
         }
         else
         {
         	readDB();
         }
+        context = this;
         setupTable();
     }
 
@@ -100,6 +109,43 @@ public class DataTableActivity extends Activity
                 devName.setText(dev.getDevName());
                 note.setText(dev.getNote());
                 Linkify.addLinks(note, Linkify.ALL);
+                fullRow.setOnLongClickListener(new View.OnLongClickListener() {
+
+                    //@Override
+                    public boolean onLongClick(View v) {
+                        TableRow SelectedRow;
+
+                        //                        if(AlreadySelctedRow >= 0){
+                        //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
+                        //                            SelectedRow.setBackgroundColor(0xFFCCD0);
+                        //                        }
+                        SelectedRow = (TableRow)v;
+
+                        TextView date = (TextView) SelectedRow.findViewById(R.id.date);
+                        final String dateStr = date.getText().toString();
+                        //AlreadySelctedRow = v.getId();
+                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("Delete Row");
+                        alertDialog.setMessage("Delete selected row dated " + dateStr + "?");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                deleteNote(dateStr);
+
+                            }
+                        });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                //do nothing
+
+                            } });
+                        alertDialog.show();
+                        return false;
+                    }
+                });
                 table.addView(fullRow);
                 
             }
@@ -196,7 +242,8 @@ public class DataTableActivity extends Activity
         {
             getDeveloperNotes(title);
             setupTable();
-            aBar.setTitle("Scrum Notes - " + title);
+            currentOwner = title;
+            aBar.setTitle("Dev Chat - " + title);
         }
 
         return true;
@@ -413,5 +460,49 @@ public class DataTableActivity extends Activity
         
         return sb.toString();
     }
+
+    private void deleteNote(String date)
+    {
+        getContentResolver().delete(Notes.CONTENT_URI, "date(notes_date)='"+date+"' and notes_owner='"+currentOwner+"'" , null);
+        getDeveloperNotes(currentOwner);
+        setupTable();
+    }
+
+//    private View.OnLongClickListener OnLongClickTableRow = new View.OnLongClickListener() {
+//
+//        @Override
+//        public boolean onLongClick(View v) {
+//            TableRow SelectedRow;
+//
+//            //                        if(AlreadySelctedRow >= 0){
+//            //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
+//            //                            SelectedRow.setBackgroundColor(0xFFCCD0);
+//            //                        }
+//            SelectedRow = (TableRow)v;
+//
+//            final TextView date = (TextView) SelectedRow.findViewById(R.id.date);
+//            //AlreadySelctedRow = v.getId();
+//            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+//            alertDialog.setTitle("Delete Row");
+//            alertDialog.setMessage("Delete selected row dated " + date.getText() + "?");
+//            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+//            {
+//                public void onClick(DialogInterface dialog, int which)
+//                {
+//                    deleteNote(date.getText().toString());
+//
+//                }
+//            });
+//            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener()
+//            {
+//                public void onClick(DialogInterface dialog, int which)
+//                {
+//                    //do nothing
+//
+//                } });
+//            alertDialog.show();
+//            return false;
+//        }
+//    };
 
 }

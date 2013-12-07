@@ -360,7 +360,7 @@ public class MainActivity extends Activity
         //Log.d("NoteEditorActivity", "note: " + text);
         int length = text.length();
         
-        if (length == 0 || text.contains("To get started, select Tools") || text.equals("Yesterday: \n\nToday:")) 
+        if (length == 0 || text.contains("To get started, select Tools") || text.equals("Yesterday: \n\nToday: ")) 
         {
             //Toast.makeText(this, "Nothing to save.", Toast.LENGTH_SHORT).show();
             return;
