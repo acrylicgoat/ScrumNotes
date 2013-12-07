@@ -6,6 +6,7 @@
  */
 package com.acrylicgoat.scrumnotes;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -13,23 +14,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Goals;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
  * 
  * Activity for daily meeting notes
  */
-public class DailyNotesActivity extends SherlockActivity
+public class DailyNotesActivity extends Activity
 {
     private Cursor cursor;
     private EditText note;
@@ -40,7 +39,7 @@ public class DailyNotesActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dailynotes);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle(getString(R.string.dailynotes_title));
         aBar.setDisplayHomeAsUpEnabled(true);
         //goals = (EditText) findViewById(R.id.editGoals);
@@ -63,9 +62,9 @@ public class DailyNotesActivity extends SherlockActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.menu.activity_dailynotes, menu);
+        getMenuInflater().inflate(R.menu.activity_dailynotes, menu);
         
         return true;
     }
@@ -74,7 +73,7 @@ public class DailyNotesActivity extends SherlockActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         menu.clear();
-        getSupportMenuInflater().inflate(R.menu.activity_dailynotes, menu);
+        getMenuInflater().inflate(R.menu.activity_dailynotes, menu);
         
         return true;
     }
@@ -83,7 +82,7 @@ public class DailyNotesActivity extends SherlockActivity
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == R.id.save)
         {

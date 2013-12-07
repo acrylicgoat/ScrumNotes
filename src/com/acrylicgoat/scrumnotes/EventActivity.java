@@ -6,15 +6,14 @@
  */
 package com.acrylicgoat.scrumnotes;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -22,7 +21,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity for adding an event to calendar
  *
  */
-public class EventActivity extends SherlockActivity
+public class EventActivity extends Activity
 {
     private EditText title;
     private EditText description;
@@ -33,7 +32,7 @@ public class EventActivity extends SherlockActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Event");
         aBar.setDisplayHomeAsUpEnabled(true);
         title = (EditText) findViewById(R.id.eventTitle);
@@ -42,14 +41,14 @@ public class EventActivity extends SherlockActivity
     }
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.menu.menu_event, menu);
+        getMenuInflater().inflate(R.menu.menu_event, menu);
         return true;
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == R.id.event)
         {

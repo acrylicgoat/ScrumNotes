@@ -16,17 +16,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +47,6 @@ import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Developers;
 import com.acrylicgoat.scrumnotes.provider.Notes;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * @author ed woodward
@@ -49,19 +54,21 @@ import com.actionbarsherlock.view.MenuItem;
  * Activity to display notes taken.  They can be filtered by developer
  *
  */
-public class DataTableActivity extends SherlockActivity
+public class DataTableActivity extends Activity
 {
     ArrayList<DevNote> notes;
     ArrayList<Developer> devs;
     private static final int MENUITEM = Menu.FIRST;
     ActionBar aBar;
+    Context context;
+    String currentOwner;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datatable);
-        aBar = getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Everyone");
         aBar.setDisplayHomeAsUpEnabled(true);
      // read database
@@ -70,11 +77,13 @@ public class DataTableActivity extends SherlockActivity
         {
         	getDeveloperNotes(devs.get(0).getName());
         	aBar.setTitle("Scrum Notes - " + devs.get(0).getName());
+			currentOwner = devs.get(0).getName();
         }
         else
         {
         	readDB();
         }
+        context = this;
         setupTable();
     }
 
@@ -100,6 +109,43 @@ public class DataTableActivity extends SherlockActivity
                 devName.setText(dev.getDevName());
                 note.setText(dev.getNote());
                 Linkify.addLinks(note, Linkify.ALL);
+                fullRow.setOnLongClickListener(new View.OnLongClickListener() {
+
+                    //@Override
+                    public boolean onLongClick(View v) {
+                        TableRow SelectedRow;
+
+                        //                        if(AlreadySelctedRow >= 0){
+                        //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
+                        //                            SelectedRow.setBackgroundColor(0xFFCCD0);
+                        //                        }
+                        SelectedRow = (TableRow)v;
+
+                        TextView date = (TextView) SelectedRow.findViewById(R.id.date);
+                        final String dateStr = date.getText().toString();
+                        //AlreadySelctedRow = v.getId();
+                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("Delete Row");
+                        alertDialog.setMessage("Delete selected row dated " + dateStr + "?");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                deleteNote(dateStr);
+
+                            }
+                        });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                //do nothing
+
+                            } });
+                        alertDialog.show();
+                        return false;
+                    }
+                });
                 table.addView(fullRow);
                 
             }
@@ -115,7 +161,7 @@ public class DataTableActivity extends SherlockActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {
-        getSupportMenuInflater().inflate(R.menu.activity_devtable, menu);
+        getMenuInflater().inflate(R.menu.activity_devtable, menu);
         //getDevelopers();
         if(devs != null && devs.size() > 0)
         {
@@ -134,7 +180,7 @@ public class DataTableActivity extends SherlockActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         menu.clear();
-        getSupportMenuInflater().inflate(R.menu.activity_devtable, menu);
+        getMenuInflater().inflate(R.menu.activity_devtable, menu);
         getDevelopers();
         if(devs != null && devs.size() > 0)
         {
@@ -149,7 +195,7 @@ public class DataTableActivity extends SherlockActivity
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         String title = (String) item.getTitle();
         if(item.getItemId() == R.id.share)
@@ -196,7 +242,8 @@ public class DataTableActivity extends SherlockActivity
         {
             getDeveloperNotes(title);
             setupTable();
-            aBar.setTitle("Scrum Notes - " + title);
+            currentOwner = title;
+            aBar.setTitle("Dev Chat - " + title);
         }
 
         return true;
@@ -413,5 +460,49 @@ public class DataTableActivity extends SherlockActivity
         
         return sb.toString();
     }
+
+    private void deleteNote(String date)
+    {
+        getContentResolver().delete(Notes.CONTENT_URI, "date(notes_date)='"+date+"' and notes_owner='"+currentOwner+"'" , null);
+        getDeveloperNotes(currentOwner);
+        setupTable();
+    }
+
+//    private View.OnLongClickListener OnLongClickTableRow = new View.OnLongClickListener() {
+//
+//        @Override
+//        public boolean onLongClick(View v) {
+//            TableRow SelectedRow;
+//
+//            //                        if(AlreadySelctedRow >= 0){
+//            //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
+//            //                            SelectedRow.setBackgroundColor(0xFFCCD0);
+//            //                        }
+//            SelectedRow = (TableRow)v;
+//
+//            final TextView date = (TextView) SelectedRow.findViewById(R.id.date);
+//            //AlreadySelctedRow = v.getId();
+//            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+//            alertDialog.setTitle("Delete Row");
+//            alertDialog.setMessage("Delete selected row dated " + date.getText() + "?");
+//            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+//            {
+//                public void onClick(DialogInterface dialog, int which)
+//                {
+//                    deleteNote(date.getText().toString());
+//
+//                }
+//            });
+//            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener()
+//            {
+//                public void onClick(DialogInterface dialog, int which)
+//                {
+//                    //do nothing
+//
+//                } });
+//            alertDialog.show();
+//            return false;
+//        }
+//    };
 
 }

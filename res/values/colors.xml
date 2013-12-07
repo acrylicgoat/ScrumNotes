@@ -2,5 +2,6 @@
 <resources>
     <color name="white_text">#FFFFFF</color>
     <color name="purple">#8F45DA</color>
+    <color name="light_purple">#b380e5</color>
     
 </resources>
