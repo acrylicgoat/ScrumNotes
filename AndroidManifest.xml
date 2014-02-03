@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.acrylicgoat.scrumnotes"
-          android:versionCode="5"
-          android:versionName="1.4">
+          android:versionCode="6"
+          android:versionName="1.5">
 
     <uses-sdk
-            android:minSdkVersion="8"
-            android:targetSdkVersion="18"/>
+            android:minSdkVersion="14"
+            android:targetSdkVersion="19"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
@@ -19,7 +19,7 @@
         <provider android:name="com.acrylicgoat.scrumnotes.provider.GoalsProvider"
                   android:authorities="com.acrylicgoat.scrumnotes.provider.GoalsProvider"/>
         <activity
-                android:name=".MainActivity"
+                android:name=".DailyNotesActivity"
                 android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,7 +34,7 @@
         <activity android:name=".DataTableActivity" android:label="@string/title_activity_main"
                   android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".GoalsActivity" android:label="@string/title_activity_main"/>
-        <activity android:name=".DailyNotesActivity" android:label="@string/title_activity_main"/>
+        <activity android:name=".MainActivity" android:label="@string/title_activity_main"/>
     </application>
 
 </manifest>
