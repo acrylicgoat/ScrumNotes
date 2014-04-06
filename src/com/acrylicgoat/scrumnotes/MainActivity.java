@@ -424,35 +424,35 @@ public class MainActivity extends Activity
         switch (position)
         {
             case 0:
-                drawerLayout.closeDrawers();
+                Intent dailyIntent = new Intent(getApplicationContext(), DailyNotesActivity.class);
+                startActivity(dailyIntent);
                 break;
             case 1:
-              Intent devIntent = new Intent(getApplicationContext(), DevActivity.class);
-              startActivity(devIntent);
+                drawerLayout.closeDrawers();
               break;
             case 2:
-              Intent noteIntent = new Intent(getApplicationContext(), NotesActivity.class);
-              startActivity(noteIntent);
-              break;
+                Intent devIntent = new Intent(getApplicationContext(), DevActivity.class);
+                startActivity(devIntent);
+                break;
             case 3:
-              Intent eventIntent = new Intent(getApplicationContext(), EventActivity.class);
-              startActivity(eventIntent);
-              break;
+                Intent goalsIntent = new Intent(getApplicationContext(), GoalsActivity.class);
+                startActivity(goalsIntent);
+                break;
             case 4:
-              Intent dailyIntent = new Intent(getApplicationContext(), DailyNotesActivity.class);
-              startActivity(dailyIntent);
-              break;
+                Intent noteIntent = new Intent(getApplicationContext(), NotesActivity.class);
+                startActivity(noteIntent);
+                break;
             case 5:
-              Intent goalsIntent = new Intent(getApplicationContext(), GoalsActivity.class);
-              startActivity(goalsIntent);
-              break;
+                Intent eventIntent = new Intent(getApplicationContext(), EventActivity.class);
+                startActivity(eventIntent);
+                break;
             case 6:
-              Intent reportIntent = new Intent(getApplicationContext(), DataTableActivity.class);
-              startActivity(reportIntent);
-              break;
+                Intent reportIntent = new Intent(getApplicationContext(), DataTableActivity.class);
+                startActivity(reportIntent);
+                break;
             case 7:
-              startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.acrylicgoat.scrumnotes")));
-              break;
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.acrylicgoat.scrumnotes")));
+                break;
         }
     }
 
@@ -472,23 +472,23 @@ public class MainActivity extends Activity
         hm1.put("nav_item",items[0]);
 
         HashMap<String,String> hm2 = new HashMap<String,String>();
-        hm2.put("nav_icon",Integer.toString(R.drawable.dev));
+        hm2.put("nav_icon",Integer.toString(R.drawable.edit));
         hm2.put("nav_item",items[1]);
 
         HashMap<String,String> hm3 = new HashMap<String,String>();
-        hm3.put("nav_icon",Integer.toString(R.drawable.ic_action_chat));
+        hm3.put("nav_icon",Integer.toString(R.drawable.dev));
         hm3.put("nav_item",items[2]);
 
         HashMap<String,String> hm4 = new HashMap<String,String>();
-        hm4.put("nav_icon",Integer.toString(R.drawable.ic_action_new_event));
+        hm4.put("nav_icon",Integer.toString(R.drawable.ic_action_time));
         hm4.put("nav_item",items[3]);
 
         HashMap<String,String> hm5 = new HashMap<String,String>();
-        hm5.put("nav_icon",Integer.toString(R.drawable.edit));
+        hm5.put("nav_icon",Integer.toString(R.drawable.ic_action_chat));
         hm5.put("nav_item",items[4]);
 
         HashMap<String,String> hm6 = new HashMap<String,String>();
-        hm6.put("nav_icon",Integer.toString(R.drawable.ic_action_time));
+        hm6.put("nav_icon",Integer.toString(R.drawable.ic_action_new_event));
         hm6.put("nav_item",items[5]);
 
         HashMap<String,String> hm7 = new HashMap<String,String>();

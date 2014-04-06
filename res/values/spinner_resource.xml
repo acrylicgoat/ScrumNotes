@@ -2,11 +2,11 @@
 <resources>
     <string-array name="nav_list">
         <item>Home</item>
+        <item>Developer Notes</item>
         <item>Developers</item>
+        <item>Goals</item>
         <item>Parking Lot Notes</item>
         <item>Add Event</item>
-        <item>Daily Notes</item>
-        <item>Goals</item>
         <item>Developer Report</item>
         <item>Rate This App</item>
     </string-array>

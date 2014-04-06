@@ -113,7 +113,7 @@ public class GoalsActivity extends Activity
         }
         else if(item.getItemId() == android.R.id.home)
         {
-            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent mainIntent = new Intent(getApplicationContext(), DailyNotesActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainIntent);
         }
