@@ -19,19 +19,24 @@
             android:text="@string/daily_notes"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white_text" />
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView3"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true">
 
-        <EditText
-            android:id="@+id/editDaily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView3"
-            android:hint="@string/daily_notes_hint"
-            android:ems="10"
-            android:gravity="top|left"
-            android:inputType="textCapSentences|textMultiLine"
-            android:lines="25"
-            android:singleLine="false" />
+            <EditText
+                android:id="@+id/editDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/daily_notes_hint"
+                android:ems="10"
+                android:gravity="top|left"
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="25"
+                android:singleLine="false" />
+        </ScrollView>
 
     </RelativeLayout>
     <ListView android:id="@+id/left_drawer"

@@ -13,22 +13,26 @@
         android:text="@string/goals"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white_text" />
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true">
 
-    <EditText
-        android:id="@+id/editGoals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView4"
-        android:hint="@string/goals_hint"
-        android:ems="10"
-        android:gravity="top|left"
-        android:inputType="textCapSentences|textMultiLine"
-        android:lines="25"
-        android:singleLine="false" >
+        <EditText
+            android:id="@+id/editGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/goals_hint"
+            android:ems="10"
+            android:gravity="top|left"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="25"
+            android:singleLine="false" >
 
         
-    </EditText>
+        </EditText>
+    </ScrollView>
 
 </RelativeLayout>

@@ -13,23 +13,27 @@
         android:text="@string/parking_lot_note_heading"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white_text" />
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true">
 
-    <EditText
-        android:id="@+id/editNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:editable="true"
-        android:hint="@string/parking_lot_note_hint"
-        android:ems="10"
-        android:gravity="top|left"
-        android:inputType="textCapSentences|textMultiLine"
-        android:lines="40"
-        android:singleLine="false" >
+        <EditText
+            android:id="@+id/editNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="true"
+            android:hint="@string/parking_lot_note_hint"
+            android:ems="10"
+            android:gravity="top|left"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="40"
+            android:singleLine="false" >
 
-        <requestFocus />
-    </EditText>
+            <requestFocus />
+        </EditText>
+    </ScrollView>
 
 </RelativeLayout>
