@@ -23,5 +23,5 @@ ScrumNotes was developed for the unique way our team holds Scrum with a mostly r
 
 App icon derived from Sticky Note by Dakirby309.  Creative Commons Attribution-Noncommercial 3.0
 
-The code is open source under an LGPL license.  See LICENSE.txt for details. It has a dependency on [ActionbarScherlock](http://actionbarsherlock.com/) which must be added as a library project.
+The code is open source under an LGPL license.  See LICENSE.txt for details. It has a dependency on AppCompat which must be added as a library.
 
