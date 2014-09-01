@@ -318,14 +318,7 @@ public class DailyNotesActivity extends Activity
         navTitles.add(hm8);
     }
     
-//    private String escape(String text)
-//    {
-//        String returnVal = "";
-//        
-//        returnVal = text.replace("'", "''");
-//        
-//        return returnVal;
-//    }
+
     
 
 

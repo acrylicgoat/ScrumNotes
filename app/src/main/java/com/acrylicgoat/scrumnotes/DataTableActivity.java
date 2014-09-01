@@ -73,7 +73,7 @@ public class DataTableActivity extends Activity
         if(devs != null)
         {
         	getDeveloperNotes(devs.get(0).getName());
-        	aBar.setTitle(getString(R.string.app_title) + devs.get(0).getName());
+        	aBar.setTitle(getString(R.string.app_title) + " " + devs.get(0).getName());
 			currentOwner = devs.get(0).getName();
         }
         else
@@ -237,7 +237,7 @@ public class DataTableActivity extends Activity
             getDeveloperNotes(title);
             setupTable();
             currentOwner = title;
-            aBar.setTitle(getString(R.string.app_title) + title);
+            aBar.setTitle(getString(R.string.app_title) + " " + title);
         }
 
         return true;
@@ -419,23 +419,7 @@ public class DataTableActivity extends Activity
     
     private String removeNewLines(String strToEdit)
     {
-//        StringBuilder sb = new StringBuilder();
-//        String str = strToEdit;
-//
-//        int index= str.rindexOf("\n");
-//        int prevIndex = 0;
-//
-//        while(index > -1)
-//        {
-//            sb.append(str.substring(0,index));
-//            sb.append(" ");
-//            //sb.append(strToEdit.substring(index + 1));
-//            prevIndex = index;
-//            index = strToEdit.indexOf("\n", prevIndex + 1);
-//        }
-//
-//
-//        return sb.toString();
+
         return strToEdit.replace("\n"," ");
     }
     

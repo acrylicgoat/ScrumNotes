@@ -402,15 +402,6 @@ public class MainActivity extends Activity
         return sb.toString();
     }
     
-//    private String escape(String text)
-//    {
-//        String returnVal = "";
-//        
-//        returnVal = text.replace("'", "''");
-//        
-//        return returnVal;
-//    }
-    
     private void readDB()
     {
          devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
