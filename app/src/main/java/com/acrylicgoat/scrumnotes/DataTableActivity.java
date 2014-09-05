@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -25,7 +24,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.util.Linkify;
@@ -39,7 +37,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.acrylicgoat.scrumnotes.R;
 import com.acrylicgoat.scrumnotes.beans.DevNote;
 import com.acrylicgoat.scrumnotes.beans.Developer;
 import com.acrylicgoat.scrumnotes.provider.DBUtils;
@@ -76,7 +73,7 @@ public class DataTableActivity extends Activity
         if(devs != null)
         {
         	getDeveloperNotes(devs.get(0).getName());
-        	aBar.setTitle("Scrum Notes - " + devs.get(0).getName());
+        	aBar.setTitle(getString(R.string.app_title) + " " + devs.get(0).getName());
 			currentOwner = devs.get(0).getName();
         }
         else
@@ -115,15 +112,12 @@ public class DataTableActivity extends Activity
                     public boolean onLongClick(View v) {
                         TableRow SelectedRow;
 
-                        //                        if(AlreadySelctedRow >= 0){
-                        //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
-                        //                            SelectedRow.setBackgroundColor(0xFFCCD0);
-                        //                        }
+
                         SelectedRow = (TableRow)v;
 
                         TextView date = (TextView) SelectedRow.findViewById(R.id.date);
                         final String dateStr = date.getText().toString();
-                        //AlreadySelctedRow = v.getId();
+
                         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                         alertDialog.setTitle("Delete Row");
                         alertDialog.setMessage("Delete selected row dated " + dateStr + "?");
@@ -162,12 +156,12 @@ public class DataTableActivity extends Activity
     public boolean onCreateOptionsMenu(Menu menu) 
     {
         getMenuInflater().inflate(R.menu.activity_devtable, menu);
-        //getDevelopers();
+
         if(devs != null && devs.size() > 0)
         {
             for (int i = 0; i < devs.size(); i++)
             {
-                Developer dev = (Developer)devs.get(i);
+                Developer dev = devs.get(i);
                 
                 menu.add(0, MENUITEM, 0, dev.getName()).setIcon(R.drawable.dev);
                 
@@ -186,7 +180,7 @@ public class DataTableActivity extends Activity
         {
             for (int i = 0; i < devs.size(); i++)
             {
-                Developer dev = (Developer)devs.get(i);
+                Developer dev = devs.get(i);
                 menu.add(0, MENUITEM, 0, dev.getName());
                 
             }
@@ -243,7 +237,7 @@ public class DataTableActivity extends Activity
             getDeveloperNotes(title);
             setupTable();
             currentOwner = title;
-            aBar.setTitle("Dev Chat - " + title);
+            aBar.setTitle(getString(R.string.app_title) + " " + title);
         }
 
         return true;
@@ -283,7 +277,7 @@ public class DataTableActivity extends Activity
     {
          devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
           
-         Collections.sort((List<Developer>)devs);
+         Collections.sort(devs);
               
     }
     
@@ -331,6 +325,7 @@ public class DataTableActivity extends Activity
         //String fileName = "snExport.csv";
         File file = new File(snDir, sb.toString());
         String text = createTSV();
+        Log.d("DataTableActivity.exportReport()"," report: " + text);
         PrintWriter pw = null;
         
         try
@@ -359,7 +354,7 @@ public class DataTableActivity extends Activity
         StringBuilder csv = new StringBuilder();
         for (int i = 0; i < notes.size(); i++)
         {
-            DevNote dev = (DevNote)notes.get(i);
+            DevNote dev = notes.get(i);
             csv.append(dev.getDate());
             csv.append("\t");
             csv.append(dev.getDevName());
@@ -424,22 +419,8 @@ public class DataTableActivity extends Activity
     
     private String removeNewLines(String strToEdit)
     {
-        StringBuilder sb = new StringBuilder();
-        
-        int index= strToEdit.indexOf("Today:");
-        
-        if(index > -1)
-        {
-            sb.append(strToEdit.substring(0,index-2));
-            sb.append(" ");
-            sb.append(strToEdit.substring(index));
-        }
-        else
-        {
-            return strToEdit;
-        }
-        
-        return sb.toString();
+
+        return strToEdit.replace("\n"," ");
     }
     
     private String addNewLines(String strToEdit)
@@ -468,41 +449,6 @@ public class DataTableActivity extends Activity
         setupTable();
     }
 
-//    private View.OnLongClickListener OnLongClickTableRow = new View.OnLongClickListener() {
-//
-//        @Override
-//        public boolean onLongClick(View v) {
-//            TableRow SelectedRow;
-//
-//            //                        if(AlreadySelctedRow >= 0){
-//            //                            SelectedRow = (TableRow) findViewById(AlreadySelctedRow);
-//            //                            SelectedRow.setBackgroundColor(0xFFCCD0);
-//            //                        }
-//            SelectedRow = (TableRow)v;
-//
-//            final TextView date = (TextView) SelectedRow.findViewById(R.id.date);
-//            //AlreadySelctedRow = v.getId();
-//            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-//            alertDialog.setTitle("Delete Row");
-//            alertDialog.setMessage("Delete selected row dated " + date.getText() + "?");
-//            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
-//            {
-//                public void onClick(DialogInterface dialog, int which)
-//                {
-//                    deleteNote(date.getText().toString());
-//
-//                }
-//            });
-//            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener()
-//            {
-//                public void onClick(DialogInterface dialog, int which)
-//                {
-//                    //do nothing
-//
-//                } });
-//            alertDialog.show();
-//            return false;
-//        }
-//    };
+
 
 }
