@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -275,9 +276,31 @@ public class DataTableActivity extends Activity
     
     private void getDevelopers()
     {
-         devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
-          
-         Collections.sort(devs);
+        Log.d("DataTableActivity.getDevelopers()","called");
+        //devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
+        devs = new ArrayList<Developer>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("select distinct notes_owner from notes");
+        DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+        int devColumn = cursor.getColumnIndex(Notes.OWNER);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToNext();
+            do
+            {
+                Developer dev = new Developer();
+                dev.setName(cursor.getString(devColumn));
+
+
+                devs.add(dev);
+
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        Collections.sort((List<Developer>)devs);
               
     }
     
