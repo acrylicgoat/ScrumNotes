@@ -40,6 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple"
+        android:paddingLeft="10dp"
         android:text="@string/developer_list"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white_text" />

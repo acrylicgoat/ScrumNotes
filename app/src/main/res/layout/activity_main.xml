@@ -16,6 +16,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/calendarButton"
             android:background="@color/white_text"
+            android:paddingLeft="10dp"
             android:text="Developer"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/purple"
@@ -40,6 +41,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/devName"
             android:background="@color/purple"
+            android:paddingLeft="10dp"
             android:text="@string/today"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white_text" />

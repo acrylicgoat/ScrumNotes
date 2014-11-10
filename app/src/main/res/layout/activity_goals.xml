@@ -10,6 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@color/purple"
+        android:paddingLeft="10dp"
         android:text="@string/goals"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white_text" />
