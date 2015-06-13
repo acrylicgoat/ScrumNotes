@@ -34,7 +34,7 @@
                 android:ems="10"
                 android:gravity="top|left"
                 android:inputType="textCapSentences|textMultiLine"
-                android:lines="25"
+                android:lines="115"
                 android:singleLine="false" />
         </ScrollView>
 

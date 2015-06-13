@@ -1,23 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 18
+    compileSdkVersion 22
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "com.acrylicgoat.scrumnotes"
         minSdkVersion 14
-        targetSdkVersion 18
+        targetSdkVersion 22
+        versionCode 9
+        versionName "1.9"
     }
 
     dependencies {
-        compile 'com.android.support:support-v4:18.0.+'
-        compile 'com.android.support:appcompat-v7:18.0.+'
+        compile 'com.android.support:support-v4:22.2.0'
+        compile 'com.android.support:appcompat-v7:22.2.0'
     }
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
