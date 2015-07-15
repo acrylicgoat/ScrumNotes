@@ -53,8 +53,9 @@ public class DevActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devs);
         aBar = getActionBar();
-        aBar.setTitle("Scrum Notes - Developers");
+        aBar.setTitle("ScrumNotes - Developers");
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
         //get devs from database
         readDB();
         setUI();
@@ -109,7 +110,7 @@ public class DevActivity extends Activity
               
               devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
               
-             Collections.sort((List<Developer>)devs);
+             Collections.sort(devs);
               
              fillData(devs);
              
@@ -142,7 +143,7 @@ public class DevActivity extends Activity
                   devName.setText("");
 
                   devs.add(dev);
-                  Collections.sort((List<Developer>)devs);
+                  Collections.sort(devs);
                   adapter.notifyDataSetChanged();
                   
               }
@@ -185,7 +186,6 @@ public class DevActivity extends Activity
         
         values.put(Developers.NAME, name);
 
-        //values.put(Developers.SCRUMMASTER, isScrummaster);
 
         try 
         {

@@ -68,6 +68,7 @@ public class DataTableActivity extends Activity
         aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Everyone");
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
      // read database
         getDevelopers();
         if(devs != null)
@@ -322,10 +323,9 @@ public class DataTableActivity extends Activity
         sb.append("snExport");
         sb.append(ScrumNotesUtil.getFileDate());
         sb.append(".tsv");
-        //String fileName = "snExport.csv";
         File file = new File(snDir, sb.toString());
         String text = createTSV();
-        Log.d("DataTableActivity.exportReport()"," report: " + text);
+        //Log.d("DataTableActivity.exportReport()"," report: " + text);
         PrintWriter pw = null;
         
         try
@@ -397,7 +397,7 @@ public class DataTableActivity extends Activity
         }
         catch(Exception ioe)
         {
-            //Log.d("DataTableActivity", "Exception: " + ioe.toString());
+            Log.e("DataTableActivity", "Exception: " + ioe.toString());
         }
         finally
         {
@@ -410,7 +410,7 @@ public class DataTableActivity extends Activity
             }
             catch (IOException e)
             {
-                //Log.d("DataTableActivity", "Exception: " + e.toString());
+                Log.e("DataTableActivity", "Exception: " + e.toString());
             }
             
         }

@@ -29,7 +29,7 @@
             android:layout_gravity="fill_horizontal"
             android:layout_centerHorizontal="true"
             android:background="@color/white_text"
-            android:padding="6dp"
+            android:padding="10dp"
             android:layout_alignParentTop="true"
             android:src="@drawable/calendar" />
 

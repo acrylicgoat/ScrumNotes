@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,18 +44,23 @@ public class GoalsActivity extends Activity
         aBar = getActionBar();
         aBar.setTitle(getString(R.string.goal_title));
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
         goals = (EditText) findViewById(R.id.editGoals);
         Display d = getWindowManager().getDefaultDisplay();
-        if(isTabletDevice(d, this))
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;
+        if(isTabletDevice())
         {
-            if(d.getWidth() < d.getHeight())
+            if(screenWidth < screenHeight)
             {
                 //in portrait so give more lines
-                goals.setLines(20);
+                goals.setLines(200);
             }
             else
             {
-                goals.setLines(11);
+                goals.setLines(50);
             }
                 
         }
@@ -186,7 +192,7 @@ public class GoalsActivity extends Activity
         cursor = db.rawQuery("select goals_goal from goals", null);
     }
     
-    private boolean isTabletDevice(Display d, Activity context) 
+    private boolean isTabletDevice()
     {
         if (android.os.Build.VERSION.SDK_INT >= 11) 
         { // honeycomb

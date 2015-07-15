@@ -37,6 +37,7 @@ public class NotesActivity extends Activity
         aBar.setTitle(getString(R.string.app_name));
         note = (EditText) findViewById(R.id.editNotes);
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
     }
     
     @Override
