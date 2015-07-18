@@ -247,7 +247,7 @@ public class DataTableActivity extends Activity
     private void getDeveloperNotes(String name)
     {
         notes = new ArrayList<DevNote>();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(125);
         sb.append("select date(notes_date) as notes_date, notes_owner, notes_note from notes where notes_owner='" + name + "' order by date(notes_date) desc");
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -285,7 +285,7 @@ public class DataTableActivity extends Activity
     private void readDB()
     {
         notes = new ArrayList<DevNote>();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(100);
         sb.append("select date(notes_date) as notes_date, notes_owner, notes_note from notes order by date(notes_date) desc");
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();

@@ -168,7 +168,7 @@ public class GoalsActivity extends Activity
         if(cursor.getCount()>0)
         { 
             //Log.d("MainActivity", "saveNote(): doing update ");
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(28);
             sb.append("update goals set goals_goal = '");
             sb.append(escape(goal));
             sb.append("'");

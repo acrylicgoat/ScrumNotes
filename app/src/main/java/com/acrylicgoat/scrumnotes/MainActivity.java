@@ -76,11 +76,11 @@ public class MainActivity extends Activity
         sharedPref = getSharedPreferences("com.acrylicgoat.scrumnotes",MODE_PRIVATE);
         if(savedInstanceState != null)
         {
-        	currentOwner = savedInstanceState.getString("currentOwner");
+        	currentOwner = savedInstanceState.getString(getString(R.string.current_owner));
         }
         if(currentOwner == null || currentOwner.equals(""))
         {
-        	currentOwner = sharedPref.getString("currentOwner", "");
+        	currentOwner = sharedPref.getString(getString(R.string.current_owner), "");
         }
         aBar = this.getActionBar();
         aBar.setIcon(android.R.color.transparent);
@@ -151,7 +151,7 @@ public class MainActivity extends Activity
         {
             for (int i = 0; i < devs.size(); i++)
             {
-                Developer dev = (Developer)devs.get(i);
+                Developer dev = devs.get(i);
                 if(i == 0 && (currentOwner == null || currentOwner.equals("")))
                 {
                     currentOwner = dev.getName();
@@ -219,7 +219,7 @@ public class MainActivity extends Activity
     {
     	super.onPause();
     	SharedPreferences.Editor ed = sharedPref.edit();
-        ed.putString("currentOwner", currentOwner);
+        ed.putString(getString(R.string.current_owner), currentOwner);
         ed.commit();
     	saveNote();
     }
@@ -239,7 +239,7 @@ public class MainActivity extends Activity
     {
         super.onSaveInstanceState(outState);
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
-        outState.putString("currentOwner", currentOwner);
+        outState.putString(getString(R.string.current_owner), currentOwner);
         
     }
     
@@ -277,7 +277,7 @@ public class MainActivity extends Activity
     private String getYesterday(String owner)
     {
         //Log.d("MainActivity", "getYesterday() called: " + owner);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(103);
         String results = "";
         sb.append("select notes_note from notes where notes_owner='");
         sb.append(currentOwner);
@@ -366,7 +366,7 @@ public class MainActivity extends Activity
         if(cursor.getCount()>0)
         { 
             //Log.d("MainActivity", "saveNote(): doing update ");
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(48);
             sb.append("update notes set notes_note = '");
             sb.append(ScrumNotesUtil.escape(text));
             sb.append("' where notes_owner='");
@@ -385,7 +385,7 @@ public class MainActivity extends Activity
     
     private String getTodaySQL()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(96);
         sb.append("select notes_note from notes where notes_owner='");
         sb.append(currentOwner);
         sb.append("' and date(notes_date) = date('now','localtime')");

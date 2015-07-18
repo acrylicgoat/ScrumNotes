@@ -44,5 +44,6 @@
     <string name="app_title">ScrumNotes - </string>
     <string name="nav_icon">nav_icon</string>
     <string name="nav_item">nav_item</string>
+    <string name="current_owner">currentOwner</string>
 
 </resources>

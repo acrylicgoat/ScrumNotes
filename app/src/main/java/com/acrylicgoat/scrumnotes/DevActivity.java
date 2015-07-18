@@ -8,7 +8,6 @@ package com.acrylicgoat.scrumnotes;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -74,7 +73,7 @@ public class DevActivity extends Activity
     }
     
     @Override
-    public boolean onContextItemSelected(android.view.MenuItem item) 
+    public boolean onContextItemSelected(MenuItem item)
     {
         AdapterContextMenuInfo info= (AdapterContextMenuInfo) item.getMenuInfo();
         Developer dev = (Developer)devList.getItemAtPosition(info.position);
@@ -155,13 +154,13 @@ public class DevActivity extends Activity
             //@Override
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
-                if(event.getAction() == KeyEvent.ACTION_DOWN)
+                if(event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER))
                 {
-                    if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)
-                    {
+//                    if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)
+//                    {
                         EditText devName = (EditText)findViewById(R.id.devName);
                         saveDeveloper(devName.getText().toString());
-                    }
+                    //}
                 }
                 return false;
             }
