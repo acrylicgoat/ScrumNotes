@@ -8,7 +8,6 @@ package com.acrylicgoat.scrumnotes;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -53,8 +52,9 @@ public class DevActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devs);
         aBar = getActionBar();
-        aBar.setTitle("Scrum Notes - Developers");
+        aBar.setTitle("ScrumNotes - Developers");
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
         //get devs from database
         readDB();
         setUI();
@@ -73,7 +73,7 @@ public class DevActivity extends Activity
     }
     
     @Override
-    public boolean onContextItemSelected(android.view.MenuItem item) 
+    public boolean onContextItemSelected(MenuItem item)
     {
         AdapterContextMenuInfo info= (AdapterContextMenuInfo) item.getMenuInfo();
         Developer dev = (Developer)devList.getItemAtPosition(info.position);
@@ -109,7 +109,7 @@ public class DevActivity extends Activity
               
               devs = DBUtils.readCursorIntoList(getContentResolver().query(Developers.CONTENT_URI, null, null, null, null));
               
-             Collections.sort((List<Developer>)devs);
+             Collections.sort(devs);
               
              fillData(devs);
              
@@ -142,7 +142,7 @@ public class DevActivity extends Activity
                   devName.setText("");
 
                   devs.add(dev);
-                  Collections.sort((List<Developer>)devs);
+                  Collections.sort(devs);
                   adapter.notifyDataSetChanged();
                   
               }
@@ -154,13 +154,13 @@ public class DevActivity extends Activity
             //@Override
             public boolean onKey(View v, int keyCode, KeyEvent event)
             {
-                if(event.getAction() == KeyEvent.ACTION_DOWN)
+                if(event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER))
                 {
-                    if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)
-                    {
+//                    if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)
+//                    {
                         EditText devName = (EditText)findViewById(R.id.devName);
                         saveDeveloper(devName.getText().toString());
-                    }
+                    //}
                 }
                 return false;
             }
@@ -185,7 +185,6 @@ public class DevActivity extends Activity
         
         values.put(Developers.NAME, name);
 
-        //values.put(Developers.SCRUMMASTER, isScrummaster);
 
         try 
         {

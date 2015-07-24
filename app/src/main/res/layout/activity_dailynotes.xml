@@ -14,6 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+
             android:layout_alignParentTop="true"
             android:background="@color/purple"
             android:text="@string/daily_notes"
@@ -34,7 +35,7 @@
                 android:ems="10"
                 android:gravity="top|left"
                 android:inputType="textCapSentences|textMultiLine"
-                android:lines="25"
+                android:lines="115"
                 android:singleLine="false" />
         </ScrollView>
 

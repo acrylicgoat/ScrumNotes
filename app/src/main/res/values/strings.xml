@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">ScrumNotes</string>
-    <string name="title_activity_main">Scrum Notes</string>
+    <string name="title_activity_main">ScrumNotes</string>
     <string name="menu_save">Save</string>
     <string name="menu_event">Event</string>
     <string name="menu_share">Share</string>
@@ -14,13 +14,13 @@
     <string name="tell_friend">Tell a friend about </string>
     <string name="no_data_msg">The note is empty, so nothing to share.</string>
     <string name="today">Today: </string>
-    <string name="goal_title"><b>Scrum Notes - Goals</b></string>
-    <string name="dailynotes_title"><b>Scrum Notes - Daily Notes</b></string>
+    <string name="goal_title"><b>ScrumNotes - Goals</b></string>
+    <string name="dailynotes_title"><b>ScrumNotes - Daily Notes</b></string>
     <string name="this_week">This Week\'s Goals: </string>
-    <string name="scrumnotes_data">Scrum Notes Data: </string>
+    <string name="scrumnotes_data">ScrumNotes Data: </string>
     <string name="team_goals"> team goals.</string>
     <string name="main_insert">Yesterday: \n\nToday: </string>
-    <string name="no_devs">To get started, select Tools &#8212;> Developers and add some developers.</string>
+    <string name="no_devs">To get started, select Developers from the Nav Drawer and add some developers.</string>
     <string name="no_yesterday">No data found for Yesterday.</string>
     <string name="parking_lot_note">Scrum Parking Lot Note for </string>
     <string name="meeting_notes"> meeting notes.</string>
@@ -41,6 +41,9 @@
     <string name="date">Date</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
-    <string name="app_title">Scrum Notes - </string>
+    <string name="app_title">ScrumNotes - </string>
+    <string name="nav_icon">nav_icon</string>
+    <string name="nav_item">nav_item</string>
+    <string name="current_owner">currentOwner</string>
 
 </resources>

@@ -14,9 +14,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,19 +55,23 @@ public class DailyNotesActivity extends Activity
         aBar = getActionBar();
         aBar.setTitle(getString(R.string.app_name));
         aBar.setDisplayHomeAsUpEnabled(true);
-        //goals = (EditText) findViewById(R.id.editGoals);
+        aBar.setIcon(android.R.color.transparent);
         note = (EditText) findViewById(R.id.editDaily);
-        Display d = getWindowManager().getDefaultDisplay();
-        if(isTabletDevice(d, this))
+        //Display d = getWindowManager().getDefaultDisplay();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;
+        if(isTabletDevice())
         {
-            if(d.getWidth() < d.getHeight())
+            if(screenWidth < screenHeight)
             {
                 //in portrait so give more lines
-                note.setLines(20);
+                note.setLines(200);
             }
             else
             {
-                note.setLines(11);
+                note.setLines(50);
             }
                 
         }
@@ -79,18 +83,11 @@ public class DailyNotesActivity extends Activity
         drawerList = (ListView)findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
-        // Set the adapter for the list view
-        //drawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, navTitles));
         // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(getString(R.string.app_name));
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -215,7 +212,7 @@ public class DailyNotesActivity extends Activity
         
     }
     
-    private boolean isTabletDevice(Display d, Activity context) 
+    private boolean isTabletDevice()
     {
         if (android.os.Build.VERSION.SDK_INT >= 11) 
         { // honeycomb
@@ -274,39 +271,39 @@ public class DailyNotesActivity extends Activity
 
     private void setDrawer(String[] items)
     {
-        HashMap<String,String> hm1 = new HashMap<String,String>();
-        hm1.put("nav_icon",Integer.toString(R.drawable.home));
-        hm1.put("nav_item",items[0]);
+        HashMap<String,String> hm1 = new HashMap<>();
+        hm1.put(getString(R.string.nav_icon),Integer.toString(R.drawable.home));
+        hm1.put(getString(R.string.nav_item),items[0]);
 
-        HashMap<String,String> hm2 = new HashMap<String,String>();
-        hm2.put("nav_icon",Integer.toString(R.drawable.edit));
-        hm2.put("nav_item",items[1]);
+        HashMap<String,String> hm2 = new HashMap<>();
+        hm2.put(getString(R.string.nav_icon),Integer.toString(R.drawable.edit));
+        hm2.put(getString(R.string.nav_item),items[1]);
 
-        HashMap<String,String> hm3 = new HashMap<String,String>();
-        hm3.put("nav_icon",Integer.toString(R.drawable.dev));
-        hm3.put("nav_item",items[2]);
+        HashMap<String,String> hm3 = new HashMap<>();
+        hm3.put(getString(R.string.nav_icon),Integer.toString(R.drawable.dev));
+        hm3.put(getString(R.string.nav_item),items[2]);
 
-        HashMap<String,String> hm4 = new HashMap<String,String>();
-        hm4.put("nav_icon",Integer.toString(R.drawable.ic_action_time));
-        hm4.put("nav_item",items[3]);
+        HashMap<String,String> hm4 = new HashMap<>();
+        hm4.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_time));
+        hm4.put(getString(R.string.nav_item),items[3]);
 
-        HashMap<String,String> hm5 = new HashMap<String,String>();
-        hm5.put("nav_icon",Integer.toString(R.drawable.ic_action_chat));
-        hm5.put("nav_item",items[4]);
+        HashMap<String,String> hm5 = new HashMap<>();
+        hm5.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_chat));
+        hm5.put(getString(R.string.nav_item),items[4]);
 
-        HashMap<String,String> hm6 = new HashMap<String,String>();
-        hm6.put("nav_icon",Integer.toString(R.drawable.ic_action_new_event));
-        hm6.put("nav_item",items[5]);
+        HashMap<String,String> hm6 = new HashMap<>();
+        hm6.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_new_event));
+        hm6.put(getString(R.string.nav_item),items[5]);
 
-        HashMap<String,String> hm7 = new HashMap<String,String>();
-        hm7.put("nav_icon",Integer.toString(R.drawable.ic_action_group));
-        hm7.put("nav_item",items[6]);
+        HashMap<String,String> hm7 = new HashMap<>();
+        hm7.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_group));
+        hm7.put(getString(R.string.nav_item),items[6]);
 
-        HashMap<String,String> hm8 = new HashMap<String,String>();
-        hm8.put("nav_icon",Integer.toString(R.drawable.star));
-        hm8.put("nav_item",items[7]);
+        HashMap<String,String> hm8 = new HashMap<>();
+        hm8.put(getString(R.string.nav_icon),Integer.toString(R.drawable.star));
+        hm8.put(getString(R.string.nav_item),items[7]);
 
-        navTitles = new ArrayList<HashMap<String,String>>();
+        navTitles = new ArrayList<>();
 
         navTitles.add(hm1);
         navTitles.add(hm2);

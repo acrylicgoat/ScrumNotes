@@ -35,6 +35,7 @@ public class EventActivity extends Activity
         aBar = getActionBar();
         aBar.setTitle("Scrum Notes - Event");
         aBar.setDisplayHomeAsUpEnabled(true);
+        aBar.setIcon(android.R.color.transparent);
         title = (EditText) findViewById(R.id.eventTitle);
         description = (EditText) findViewById(R.id.eventDescription);
         

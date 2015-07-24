@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.*;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import com.acrylicgoat.scrumnotes.beans.Developer;
 import com.acrylicgoat.scrumnotes.provider.DBUtils;
@@ -52,7 +52,6 @@ public class MainActivity extends Activity
     private Cursor cursor;
     private EditText today;
     private String currentOwner;
-    private ImageButton yesterday;
     ActionBar aBar;
     ArrayList<Developer> devs;
     private TextView devName;
@@ -77,13 +76,14 @@ public class MainActivity extends Activity
         sharedPref = getSharedPreferences("com.acrylicgoat.scrumnotes",MODE_PRIVATE);
         if(savedInstanceState != null)
         {
-        	currentOwner = savedInstanceState.getString("currentOwner");
+        	currentOwner = savedInstanceState.getString(getString(R.string.current_owner));
         }
         if(currentOwner == null || currentOwner.equals(""))
         {
-        	currentOwner = sharedPref.getString("currentOwner", "");
+        	currentOwner = sharedPref.getString(getString(R.string.current_owner), "");
         }
         aBar = this.getActionBar();
+        aBar.setIcon(android.R.color.transparent);
 
         today = (EditText) findViewById(R.id.editToday);
         today.setAutoLinkMask(Linkify.ALL);
@@ -98,7 +98,7 @@ public class MainActivity extends Activity
             }
         });
         devName = (TextView) findViewById(R.id.devName);
-        yesterday = (ImageButton)findViewById(R.id.calendarButton);
+        ImageButton yesterday = (ImageButton)findViewById(R.id.calendarButton);
         yesterday.setOnClickListener(new OnClickListener() 
         {
 
@@ -116,18 +116,11 @@ public class MainActivity extends Activity
         drawerList = (ListView)findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
-        // Set the adapter for the list view
-        //drawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, navTitles));
         // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(getString(R.string.app_name));
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -142,7 +135,6 @@ public class MainActivity extends Activity
         drawerToggle.syncState();
         drawerLayout.setDrawerListener(drawerToggle);
         aBar.setTitle(getString(R.string.app_name));
-        //aBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setHomeButtonEnabled(true);
         drawerList.setAdapter(sAdapter);
@@ -159,7 +151,7 @@ public class MainActivity extends Activity
         {
             for (int i = 0; i < devs.size(); i++)
             {
-                Developer dev = (Developer)devs.get(i);
+                Developer dev = devs.get(i);
                 if(i == 0 && (currentOwner == null || currentOwner.equals("")))
                 {
                     currentOwner = dev.getName();
@@ -184,7 +176,7 @@ public class MainActivity extends Activity
         {
             for (int i = 0; i < devs.size(); i++)
             {
-                Developer dev = (Developer)devs.get(i);
+                Developer dev = devs.get(i);
                 menu.add(0, MENUITEM, 0, dev.getName());
                 
             }
@@ -227,7 +219,7 @@ public class MainActivity extends Activity
     {
     	super.onPause();
     	SharedPreferences.Editor ed = sharedPref.edit();
-        ed.putString("currentOwner", currentOwner);
+        ed.putString(getString(R.string.current_owner), currentOwner);
         ed.commit();
     	saveNote();
     }
@@ -236,7 +228,6 @@ public class MainActivity extends Activity
     public void onResume()
     {
     	super.onResume();
-        //aBar.setSelectedNavigationItem(0);
         readDB();
         if(Build.VERSION.SDK_INT > 10 && devs != null && devs.size() > 0)
         {
@@ -248,7 +239,7 @@ public class MainActivity extends Activity
     {
         super.onSaveInstanceState(outState);
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
-        outState.putString("currentOwner", currentOwner);
+        outState.putString(getString(R.string.current_owner), currentOwner);
         
     }
     
@@ -286,7 +277,7 @@ public class MainActivity extends Activity
     private String getYesterday(String owner)
     {
         //Log.d("MainActivity", "getYesterday() called: " + owner);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(103);
         String results = "";
         sb.append("select notes_note from notes where notes_owner='");
         sb.append(currentOwner);
@@ -362,7 +353,6 @@ public class MainActivity extends Activity
         
         if (length == 0 || text.contains("To get started, select Tools") || text.equals("Yesterday: \n\nToday: ")) 
         {
-            //Toast.makeText(this, "Nothing to save.", Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -376,7 +366,7 @@ public class MainActivity extends Activity
         if(cursor.getCount()>0)
         { 
             //Log.d("MainActivity", "saveNote(): doing update ");
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(48);
             sb.append("update notes set notes_note = '");
             sb.append(ScrumNotesUtil.escape(text));
             sb.append("' where notes_owner='");
@@ -395,7 +385,7 @@ public class MainActivity extends Activity
     
     private String getTodaySQL()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(96);
         sb.append("select notes_note from notes where notes_owner='");
         sb.append(currentOwner);
         sb.append("' and date(notes_date) = date('now','localtime')");
@@ -458,39 +448,39 @@ public class MainActivity extends Activity
 
     private void setDrawer(String[] items)
     {
-        HashMap<String,String> hm1 = new HashMap<String,String>();
-        hm1.put("nav_icon",Integer.toString(R.drawable.home));
-        hm1.put("nav_item",items[0]);
+        HashMap<String,String> hm1 = new HashMap<>();
+        hm1.put(getString(R.string.nav_icon),Integer.toString(R.drawable.home));
+        hm1.put(getString(R.string.nav_item),items[0]);
 
-        HashMap<String,String> hm2 = new HashMap<String,String>();
-        hm2.put("nav_icon",Integer.toString(R.drawable.edit));
-        hm2.put("nav_item",items[1]);
+        HashMap<String,String> hm2 = new HashMap<>();
+        hm2.put(getString(R.string.nav_icon),Integer.toString(R.drawable.edit));
+        hm2.put(getString(R.string.nav_item),items[1]);
 
-        HashMap<String,String> hm3 = new HashMap<String,String>();
-        hm3.put("nav_icon",Integer.toString(R.drawable.dev));
-        hm3.put("nav_item",items[2]);
+        HashMap<String,String> hm3 = new HashMap<>();
+        hm3.put(getString(R.string.nav_icon),Integer.toString(R.drawable.dev));
+        hm3.put(getString(R.string.nav_item),items[2]);
 
-        HashMap<String,String> hm4 = new HashMap<String,String>();
-        hm4.put("nav_icon",Integer.toString(R.drawable.ic_action_time));
-        hm4.put("nav_item",items[3]);
+        HashMap<String,String> hm4 = new HashMap<>();
+        hm4.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_time));
+        hm4.put(getString(R.string.nav_item),items[3]);
 
-        HashMap<String,String> hm5 = new HashMap<String,String>();
-        hm5.put("nav_icon",Integer.toString(R.drawable.ic_action_chat));
-        hm5.put("nav_item",items[4]);
+        HashMap<String,String> hm5 = new HashMap<>();
+        hm5.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_chat));
+        hm5.put(getString(R.string.nav_item),items[4]);
 
-        HashMap<String,String> hm6 = new HashMap<String,String>();
-        hm6.put("nav_icon",Integer.toString(R.drawable.ic_action_new_event));
-        hm6.put("nav_item",items[5]);
+        HashMap<String,String> hm6 = new HashMap<>();
+        hm6.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_new_event));
+        hm6.put(getString(R.string.nav_item),items[5]);
 
-        HashMap<String,String> hm7 = new HashMap<String,String>();
-        hm7.put("nav_icon",Integer.toString(R.drawable.ic_action_group));
-        hm7.put("nav_item",items[6]);
+        HashMap<String,String> hm7 = new HashMap<>();
+        hm7.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_group));
+        hm7.put(getString(R.string.nav_item),items[6]);
 
-        HashMap<String,String> hm8 = new HashMap<String,String>();
-        hm8.put("nav_icon",Integer.toString(R.drawable.star));
-        hm8.put("nav_item",items[7]);
+        HashMap<String,String> hm8 = new HashMap<>();
+        hm8.put(getString(R.string.nav_icon),Integer.toString(R.drawable.star));
+        hm8.put(getString(R.string.nav_item),items[7]);
 
-        navTitles = new ArrayList<HashMap<String,String>>();
+        navTitles = new ArrayList<>();
 
         navTitles.add(hm1);
         navTitles.add(hm2);
