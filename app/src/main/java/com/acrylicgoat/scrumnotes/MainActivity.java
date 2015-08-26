@@ -7,6 +7,7 @@
 package com.acrylicgoat.scrumnotes;
 
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import android.app.ActionBar;
@@ -358,6 +359,9 @@ public class MainActivity extends Activity
         
         values.put(Notes.NOTE, text);
         values.put(Notes.OWNER, currentOwner);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        values.put(Notes.DATE, dateFormat.format(date));
         
         //check if a note already exists for today
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
@@ -371,7 +375,7 @@ public class MainActivity extends Activity
             sb.append(ScrumNotesUtil.escape(text));
             sb.append("' where notes_owner='");
             sb.append(currentOwner);
-            sb.append("' and date(notes_date) = date('now','localtime')");
+            sb.append("' and date(notes_date) = strftime('%Y-%m-%d', 'now','localtime')");
             dbHelper.getReadableDatabase().execSQL(sb.toString());
         }
         else
@@ -388,7 +392,7 @@ public class MainActivity extends Activity
         StringBuilder sb = new StringBuilder(96);
         sb.append("select notes_note from notes where notes_owner='");
         sb.append(currentOwner);
-        sb.append("' and date(notes_date) = date('now','localtime')");
+        sb.append("' and date(notes_date) = strftime('%Y-%m-%d', 'now','localtime')");
         return sb.toString();
     }
     
