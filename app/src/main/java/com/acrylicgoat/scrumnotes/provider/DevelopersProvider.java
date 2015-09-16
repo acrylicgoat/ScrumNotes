@@ -32,7 +32,7 @@ public class DevelopersProvider extends ContentProvider
     /** static section to initialize notes table map */
     static
     {
-        DevelopersProjectionMap = new HashMap<String,String>();
+        DevelopersProjectionMap = new HashMap<>();
         DevelopersProjectionMap.put(Developers.ID, Developers.ID);
         DevelopersProjectionMap.put(Developers.NAME, Developers.NAME);
         DevelopersProjectionMap.put(Developers.SCRUMMASTER, Developers.SCRUMMASTER);
@@ -93,7 +93,9 @@ public class DevelopersProvider extends ContentProvider
         qb.setTables(DEVELOPERS_TABLE);
         qb.setProjectionMap(DevelopersProjectionMap);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        //db.close();
+        return c;
     }
 
     /* (non-Javadoc)

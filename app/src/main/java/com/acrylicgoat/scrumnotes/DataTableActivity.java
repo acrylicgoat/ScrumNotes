@@ -102,7 +102,7 @@ public class DataTableActivity extends Activity
                 TextView devName = (TextView) fullRow.findViewById(R.id.devName);
                 TextView note = (TextView) fullRow.findViewById(R.id.description);
                 note.setAutoLinkMask(Linkify.ALL);
-                DevNote dev = (DevNote)notes.get(i);
+                DevNote dev = notes.get(i);
                 date.setText(dev.getDate());
                 devName.setText(dev.getDevName());
                 note.setText(dev.getNote());
@@ -117,7 +117,9 @@ public class DataTableActivity extends Activity
                         SelectedRow = (TableRow)v;
 
                         TextView date = (TextView) SelectedRow.findViewById(R.id.date);
+                        TextView devName = (TextView) SelectedRow.findViewById(R.id.devName);
                         final String dateStr = date.getText().toString();
+                        final String name = devName.getText().toString();
 
                         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                         alertDialog.setTitle("Delete Row");
@@ -126,7 +128,7 @@ public class DataTableActivity extends Activity
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
-                                deleteNote(dateStr);
+                                deleteNote(dateStr, name);
 
                             }
                         });
@@ -271,6 +273,7 @@ public class DataTableActivity extends Activity
             }while(cursor.moveToNext());
         }
         cursor.close();
+        db.close();
         
     }
     
@@ -284,7 +287,7 @@ public class DataTableActivity extends Activity
     
     private void readDB()
     {
-        notes = new ArrayList<DevNote>();
+        notes = new ArrayList<>();
         StringBuilder sb = new StringBuilder(100);
         sb.append("select date(notes_date) as notes_date, notes_owner, notes_note from notes order by date(notes_date) desc");
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
@@ -309,7 +312,8 @@ public class DataTableActivity extends Activity
             }while(cursor.moveToNext());
         }
         cursor.close();
-            
+        db.close();
+
     }
     
     private void exportReport()
@@ -442,11 +446,12 @@ public class DataTableActivity extends Activity
         return sb.toString();
     }
 
-    private void deleteNote(String date)
+    private void deleteNote(String date, String name)
     {
-        getContentResolver().delete(Notes.CONTENT_URI, "date(notes_date)='"+date+"' and notes_owner='"+currentOwner+"'" , null);
+        getContentResolver().delete(Notes.CONTENT_URI, "date(notes_date)='"+date+"' and notes_owner='"+name+"'" , null);
         getDeveloperNotes(currentOwner);
         setupTable();
+        aBar.setTitle(getString(R.string.app_title) + " " + currentOwner);
     }
 
 
