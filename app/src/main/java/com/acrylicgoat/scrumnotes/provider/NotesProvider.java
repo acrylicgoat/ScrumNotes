@@ -34,7 +34,7 @@ public class NotesProvider extends ContentProvider
     /** static section to initialize notes table map */
     static
     {
-        NotesProjectionMap = new HashMap<String,String>();
+        NotesProjectionMap = new HashMap<>();
         NotesProjectionMap.put(Notes.ID, Notes.ID);
         NotesProjectionMap.put(Notes.OWNER, Notes.OWNER);
         NotesProjectionMap.put(Notes.DATE, Notes.DATE);
@@ -100,7 +100,9 @@ public class NotesProvider extends ContentProvider
         qb.setTables(NOTES_TABLE);
         qb.setProjectionMap(NotesProjectionMap);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        //db.close();
+        return c;
     }
     
     
@@ -112,7 +114,9 @@ public class NotesProvider extends ContentProvider
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.update(NOTES_TABLE, values, selection, selectionArgs);
+        int returnVal = db.update(NOTES_TABLE, values, selection, selectionArgs);
+        db.close();
+        return returnVal;
     }
 
 }
