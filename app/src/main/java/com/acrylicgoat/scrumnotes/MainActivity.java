@@ -19,6 +19,7 @@ import android.widget.*;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import com.acrylicgoat.scrumnotes.beans.Developer;
+import com.acrylicgoat.scrumnotes.listener.DrawerItemClickListener;
 import com.acrylicgoat.scrumnotes.provider.DBUtils;
 import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Developers;
@@ -111,14 +112,15 @@ public class MainActivity extends Activity
             }
         });
 
-        String[] items = getResources().getStringArray(R.array.nav_list);
-        setDrawer(items);
+        //String[] items = getResources().getStringArray(R.array.nav_list);
+        //setDrawer(items);
+        navTitles = ScrumNotesUtil.setNavDrawer(this);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerList = (ListView)findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
         // Set the list's click listener
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerLayout));
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
         {
@@ -404,95 +406,95 @@ public class MainActivity extends Activity
               
     }
     
-	private void selectItem(int position)
-    {
-        switch (position)
-        {
-            case 0:
-                Intent dailyIntent = new Intent(getApplicationContext(), DailyNotesActivity.class);
-                startActivity(dailyIntent);
-                break;
-            case 1:
-                drawerLayout.closeDrawers();
-              break;
-            case 2:
-                Intent devIntent = new Intent(getApplicationContext(), DevActivity.class);
-                startActivity(devIntent);
-                break;
-            case 3:
-                Intent goalsIntent = new Intent(getApplicationContext(), GoalsActivity.class);
-                startActivity(goalsIntent);
-                break;
-            case 4:
-                Intent noteIntent = new Intent(getApplicationContext(), NotesActivity.class);
-                startActivity(noteIntent);
-                break;
-            case 5:
-                Intent eventIntent = new Intent(getApplicationContext(), EventActivity.class);
-                startActivity(eventIntent);
-                break;
-            case 6:
-                Intent reportIntent = new Intent(getApplicationContext(), DataTableActivity.class);
-                startActivity(reportIntent);
-                break;
-            case 7:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.acrylicgoat.scrumnotes")));
-                break;
-        }
-    }
+//	private void selectItem(int position)
+//    {
+//        switch (position)
+//        {
+//            case 0:
+//                Intent dailyIntent = new Intent(getApplicationContext(), DailyNotesActivity.class);
+//                startActivity(dailyIntent);
+//                break;
+//            case 1:
+//                drawerLayout.closeDrawers();
+//              break;
+//            case 2:
+//                Intent devIntent = new Intent(getApplicationContext(), DevActivity.class);
+//                startActivity(devIntent);
+//                break;
+//            case 3:
+//                Intent goalsIntent = new Intent(getApplicationContext(), GoalsActivity.class);
+//                startActivity(goalsIntent);
+//                break;
+//            case 4:
+//                Intent noteIntent = new Intent(getApplicationContext(), NotesActivity.class);
+//                startActivity(noteIntent);
+//                break;
+//            case 5:
+//                Intent eventIntent = new Intent(getApplicationContext(), EventActivity.class);
+//                startActivity(eventIntent);
+//                break;
+//            case 6:
+//                Intent reportIntent = new Intent(getApplicationContext(), DataTableActivity.class);
+//                startActivity(reportIntent);
+//                break;
+//            case 7:
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.acrylicgoat.scrumnotes")));
+//                break;
+//        }
+//    }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener
-    {
-        //@Override
-        public void onItemClick(AdapterView parent, View view, int position, long id)
-        {
-            selectItem(position);
-        }
-    }
+//    private class DrawerItemClickListener implements ListView.OnItemClickListener
+//    {
+//        //@Override
+//        public void onItemClick(AdapterView parent, View view, int position, long id)
+//        {
+//            selectItem(position);
+//        }
+//    }
 
-    private void setDrawer(String[] items)
-    {
-        HashMap<String,String> hm1 = new HashMap<>();
-        hm1.put(getString(R.string.nav_icon),Integer.toString(R.drawable.home));
-        hm1.put(getString(R.string.nav_item),items[0]);
-
-        HashMap<String,String> hm2 = new HashMap<>();
-        hm2.put(getString(R.string.nav_icon),Integer.toString(R.drawable.edit));
-        hm2.put(getString(R.string.nav_item),items[1]);
-
-        HashMap<String,String> hm3 = new HashMap<>();
-        hm3.put(getString(R.string.nav_icon),Integer.toString(R.drawable.dev));
-        hm3.put(getString(R.string.nav_item),items[2]);
-
-        HashMap<String,String> hm4 = new HashMap<>();
-        hm4.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_time));
-        hm4.put(getString(R.string.nav_item),items[3]);
-
-        HashMap<String,String> hm5 = new HashMap<>();
-        hm5.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_chat));
-        hm5.put(getString(R.string.nav_item),items[4]);
-
-        HashMap<String,String> hm6 = new HashMap<>();
-        hm6.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_new_event));
-        hm6.put(getString(R.string.nav_item),items[5]);
-
-        HashMap<String,String> hm7 = new HashMap<>();
-        hm7.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_group));
-        hm7.put(getString(R.string.nav_item),items[6]);
-
-        HashMap<String,String> hm8 = new HashMap<>();
-        hm8.put(getString(R.string.nav_icon),Integer.toString(R.drawable.star));
-        hm8.put(getString(R.string.nav_item),items[7]);
-
-        navTitles = new ArrayList<>();
-
-        navTitles.add(hm1);
-        navTitles.add(hm2);
-        navTitles.add(hm3);
-        navTitles.add(hm4);
-        navTitles.add(hm5);
-        navTitles.add(hm6);
-        navTitles.add(hm7);
-        navTitles.add(hm8);
-    }
+//    private void setDrawer(String[] items)
+//    {
+//        HashMap<String,String> hm1 = new HashMap<>();
+//        hm1.put(getString(R.string.nav_icon),Integer.toString(R.drawable.home));
+//        hm1.put(getString(R.string.nav_item),items[0]);
+//
+//        HashMap<String,String> hm2 = new HashMap<>();
+//        hm2.put(getString(R.string.nav_icon),Integer.toString(R.drawable.edit));
+//        hm2.put(getString(R.string.nav_item),items[1]);
+//
+//        HashMap<String,String> hm3 = new HashMap<>();
+//        hm3.put(getString(R.string.nav_icon),Integer.toString(R.drawable.dev));
+//        hm3.put(getString(R.string.nav_item),items[2]);
+//
+//        HashMap<String,String> hm4 = new HashMap<>();
+//        hm4.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_time));
+//        hm4.put(getString(R.string.nav_item),items[3]);
+//
+//        HashMap<String,String> hm5 = new HashMap<>();
+//        hm5.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_chat));
+//        hm5.put(getString(R.string.nav_item),items[4]);
+//
+//        HashMap<String,String> hm6 = new HashMap<>();
+//        hm6.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_new_event));
+//        hm6.put(getString(R.string.nav_item),items[5]);
+//
+//        HashMap<String,String> hm7 = new HashMap<>();
+//        hm7.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_group));
+//        hm7.put(getString(R.string.nav_item),items[6]);
+//
+//        HashMap<String,String> hm8 = new HashMap<>();
+//        hm8.put(getString(R.string.nav_icon),Integer.toString(R.drawable.star));
+//        hm8.put(getString(R.string.nav_item),items[7]);
+//
+//        navTitles = new ArrayList<>();
+//
+//        navTitles.add(hm1);
+//        navTitles.add(hm2);
+//        navTitles.add(hm3);
+//        navTitles.add(hm4);
+//        navTitles.add(hm5);
+//        navTitles.add(hm6);
+//        navTitles.add(hm7);
+//        navTitles.add(hm8);
+//    }
 }
