@@ -18,6 +18,7 @@ import com.acrylicgoat.scrumnotes.DataTableActivity;
 import com.acrylicgoat.scrumnotes.DevActivity;
 import com.acrylicgoat.scrumnotes.EventActivity;
 import com.acrylicgoat.scrumnotes.GoalsActivity;
+import com.acrylicgoat.scrumnotes.MainActivity;
 import com.acrylicgoat.scrumnotes.NotesActivity;
 
 /**
@@ -45,34 +46,43 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
         {
             case 0:
                 Intent dailyIntent = new Intent(context, DailyNotesActivity.class);
+                dailyIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(dailyIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 1:
+                Intent mainIntent = new Intent(context, MainActivity.class);
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                context.startActivity(mainIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 2:
                 Intent devIntent = new Intent(context, DevActivity.class);
+                devIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(devIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 3:
                 Intent goalsIntent = new Intent(context, GoalsActivity.class);
+                goalsIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(goalsIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 4:
                 Intent noteIntent = new Intent(context, NotesActivity.class);
+                noteIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(noteIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 5:
                 Intent eventIntent = new Intent(context, EventActivity.class);
+                eventIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(eventIntent);
                 drawerLayout.closeDrawers();
                 break;
             case 6:
                 Intent reportIntent = new Intent(context, DataTableActivity.class);
+                reportIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(reportIntent);
                 drawerLayout.closeDrawers();
                 break;
