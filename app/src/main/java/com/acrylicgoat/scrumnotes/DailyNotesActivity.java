@@ -12,7 +12,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -22,11 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import com.acrylicgoat.scrumnotes.listener.DrawerItemClickListener;
 import com.acrylicgoat.scrumnotes.provider.DatabaseHelper;
 import com.acrylicgoat.scrumnotes.provider.Goals;
 import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,9 +39,6 @@ public class DailyNotesActivity extends Activity
     private Cursor cursor;
     private EditText note;
     ActionBar aBar;
-    private List<HashMap<String,String>> navTitles;
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
     String[] from = { "nav_icon","nav_item" };
     int[] to = { R.id.nav_icon , R.id.nav_item};
@@ -57,7 +53,6 @@ public class DailyNotesActivity extends Activity
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
         note = (EditText) findViewById(R.id.editDaily);
-        //Display d = getWindowManager().getDefaultDisplay();
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int screenWidth = displaymetrics.widthPixels;
@@ -77,25 +72,24 @@ public class DailyNotesActivity extends Activity
         }
         getNotes();
 
-        String[] items = getResources().getStringArray(R.array.nav_list);
-        setDrawer(items);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerList = (ListView)findViewById(R.id.left_drawer);
+        List<HashMap<String,String>> navTitles = ScrumNotesUtil.setNavDrawer(this);
+        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ListView drawerList = (ListView)findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
         // Set the list's click listener
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerLayout));
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
         {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(getString(R.string.app_name));
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 getActionBar().setTitle(getString(R.string.app_name));
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
         drawerToggle.setDrawerIndicatorEnabled(true);
@@ -222,101 +216,6 @@ public class DailyNotesActivity extends Activity
         }
         return false;
     }
-
-    private void selectItem(int position)
-    {
-        switch (position)
-        {
-            case 0:
-                drawerLayout.closeDrawers();
-                break;
-            case 1:
-                Intent dailyIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(dailyIntent);
-                break;
-            case 2:
-                Intent devIntent = new Intent(getApplicationContext(), DevActivity.class);
-                startActivity(devIntent);
-                break;
-            case 3:
-                Intent goalsIntent = new Intent(getApplicationContext(), GoalsActivity.class);
-                startActivity(goalsIntent);
-                break;
-            case 4:
-                Intent noteIntent = new Intent(getApplicationContext(), NotesActivity.class);
-                startActivity(noteIntent);
-                break;
-            case 5:
-                Intent eventIntent = new Intent(getApplicationContext(), EventActivity.class);
-                startActivity(eventIntent);
-                break;
-            case 6:
-                Intent reportIntent = new Intent(getApplicationContext(), DataTableActivity.class);
-                startActivity(reportIntent);
-                break;
-            case 7:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.acrylicgoat.scrumnotes")));
-                break;
-        }
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener
-    {
-        //@Override
-        public void onItemClick(AdapterView parent, View view, int position, long id)
-        {
-            selectItem(position);
-        }
-    }
-
-    private void setDrawer(String[] items)
-    {
-        HashMap<String,String> hm1 = new HashMap<>();
-        hm1.put(getString(R.string.nav_icon),Integer.toString(R.drawable.home));
-        hm1.put(getString(R.string.nav_item),items[0]);
-
-        HashMap<String,String> hm2 = new HashMap<>();
-        hm2.put(getString(R.string.nav_icon),Integer.toString(R.drawable.edit));
-        hm2.put(getString(R.string.nav_item),items[1]);
-
-        HashMap<String,String> hm3 = new HashMap<>();
-        hm3.put(getString(R.string.nav_icon),Integer.toString(R.drawable.dev));
-        hm3.put(getString(R.string.nav_item),items[2]);
-
-        HashMap<String,String> hm4 = new HashMap<>();
-        hm4.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_time));
-        hm4.put(getString(R.string.nav_item),items[3]);
-
-        HashMap<String,String> hm5 = new HashMap<>();
-        hm5.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_chat));
-        hm5.put(getString(R.string.nav_item),items[4]);
-
-        HashMap<String,String> hm6 = new HashMap<>();
-        hm6.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_new_event));
-        hm6.put(getString(R.string.nav_item),items[5]);
-
-        HashMap<String,String> hm7 = new HashMap<>();
-        hm7.put(getString(R.string.nav_icon),Integer.toString(R.drawable.ic_action_group));
-        hm7.put(getString(R.string.nav_item),items[6]);
-
-        HashMap<String,String> hm8 = new HashMap<>();
-        hm8.put(getString(R.string.nav_icon),Integer.toString(R.drawable.star));
-        hm8.put(getString(R.string.nav_item),items[7]);
-
-        navTitles = new ArrayList<>();
-
-        navTitles.add(hm1);
-        navTitles.add(hm2);
-        navTitles.add(hm3);
-        navTitles.add(hm4);
-        navTitles.add(hm5);
-        navTitles.add(hm6);
-        navTitles.add(hm7);
-        navTitles.add(hm8);
-    }
-    
-
-    
 
 
 }
