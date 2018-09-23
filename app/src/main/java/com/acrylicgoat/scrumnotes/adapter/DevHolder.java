@@ -25,8 +25,8 @@ public class DevHolder
     
     public DevHolder (View base)
     {
-        iconView = (ImageView)base.findViewById(R.id.logoView);
-        nameView = (TextView)base.findViewById(R.id.devName);
+        iconView = base.findViewById(R.id.logoView);
+        nameView = base.findViewById(R.id.devName);
     }
 
 }

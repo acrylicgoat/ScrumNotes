@@ -1,22 +1,22 @@
 apply plugin: 'com.android.application'
-apply from: '../config/quality.gradle'
+//apply from: '../config/quality.gradle'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
     project.archivesBaseName = "ScrumNotes";
 
     defaultConfig {
         applicationId "com.acrylicgoat.scrumnotes"
-        minSdkVersion 14
-        targetSdkVersion 22
-        versionCode 11
-        versionName "1.11"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 12
+        versionName "1.12"
     }
 
     dependencies {
-        compile 'com.android.support:support-v4:22.2.0'
-        compile 'com.android.support:appcompat-v7:22.2.0'
+        implementation 'com.android.support:support-v4:26.1.0'
+        implementation 'com.android.support:appcompat-v7:26.1.0'
     }
 
     buildTypes {
@@ -24,8 +24,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             applicationVariants.all { variant ->
-                variant.outputs.each{ output ->
-                    output.outputFile = new File(output.outputFile.parent,output.outputFile.name.replace(".apk","-" + defaultConfig.versionName + ".apk" ))
+                variant.outputs.all {
+                    outputFileName = "${project.archivesBaseName}-${variant.name}-${variant.versionName}.apk"
                 }
             }
         }

@@ -98,9 +98,9 @@ public class DataTableActivity extends Activity
             for (int i = 0; i < notes.size(); i++)
             {
                 View fullRow = inflater.inflate(R.layout.table_row, null, false);
-                TextView date = (TextView) fullRow.findViewById(R.id.date);
-                TextView devName = (TextView) fullRow.findViewById(R.id.devName);
-                TextView note = (TextView) fullRow.findViewById(R.id.description);
+                TextView date = fullRow.findViewById(R.id.date);
+                TextView devName = fullRow.findViewById(R.id.devName);
+                TextView note = fullRow.findViewById(R.id.description);
                 note.setAutoLinkMask(Linkify.ALL);
                 DevNote dev = notes.get(i);
                 date.setText(dev.getDate());
@@ -116,8 +116,8 @@ public class DataTableActivity extends Activity
 
                         SelectedRow = (TableRow)v;
 
-                        TextView date = (TextView) SelectedRow.findViewById(R.id.date);
-                        TextView devName = (TextView) SelectedRow.findViewById(R.id.devName);
+                        TextView date = SelectedRow.findViewById(R.id.date);
+                        TextView devName = SelectedRow.findViewById(R.id.devName);
                         final String dateStr = date.getText().toString();
                         final String name = devName.getText().toString();
 

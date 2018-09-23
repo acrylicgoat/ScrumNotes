@@ -44,13 +44,9 @@ public class Developer implements Serializable, Comparable<Developer>
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      * Required method for Comparable interface
      */
-    //@Override
     public int compareTo(Developer another)
     {
-        int nameCompare = name.toUpperCase().trim().compareTo(another.name.toUpperCase().trim());
-        
-        return nameCompare;
-        
+        return name.toUpperCase().trim().compareTo(another.name.toUpperCase().trim());
         
     }
     

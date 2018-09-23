@@ -52,29 +52,29 @@ public class DailyNotesActivity extends Activity
         aBar.setTitle(getString(R.string.app_name));
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
-        note = (EditText) findViewById(R.id.editDaily);
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int screenWidth = displaymetrics.widthPixels;
-        int screenHeight = displaymetrics.heightPixels;
-        if(isTabletDevice())
-        {
-            if(screenWidth < screenHeight)
-            {
+        note = findViewById(R.id.editDaily);
+        //DisplayMetrics displaymetrics = new DisplayMetrics();
+        //getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        //int screenWidth = displaymetrics.widthPixels;
+        //int screenHeight = displaymetrics.heightPixels;
+        //if(isTabletDevice())
+        //{
+        //    if(screenWidth < screenHeight)
+        //    {
                 //in portrait so give more lines
-                note.setLines(200);
-            }
-            else
-            {
+        //        note.setLines(200);
+        //    }
+        //    else
+        //    {
                 note.setLines(50);
-            }
+        //    }
                 
-        }
+        //}
         getNotes();
 
         List<HashMap<String,String>> navTitles = ScrumNotesUtil.setNavDrawer(this);
-        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        ListView drawerList = (ListView)findViewById(R.id.left_drawer);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ListView drawerList = findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
         // Set the list's click listener
@@ -146,7 +146,7 @@ public class DailyNotesActivity extends Activity
     
     private void getNotes()
     {
-        //Log.d("MainActivity", "getYesterday() called: " + owner);
+        //Log.d("DevNotesActivity", "getYesterday() called: " + owner);
         
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -155,7 +155,7 @@ public class DailyNotesActivity extends Activity
         {
             cursor.moveToNext();
             int notesColumn = cursor.getColumnIndex(Goals.NOTE);
-            //Log.d("MainActivity.getYesterday()", "notesColumn: " + notesColumn);
+            //Log.d("DevNotesActivity.getYesterday()", "notesColumn: " + notesColumn);
             note.setText(cursor.getString(notesColumn));
             
         }
@@ -189,7 +189,7 @@ public class DailyNotesActivity extends Activity
         cursor = db.rawQuery("select goals_goal from goals", null);
         if(cursor.getCount()>0)
         { 
-            //Log.d("MainActivity", "saveNote(): doing update ");
+            //Log.d("DevNotesActivity", "saveNote(): doing update ");
             StringBuilder sb = new StringBuilder();
             sb.append("update goals set goals_note = '");
             sb.append(ScrumNotesUtil.escape(noteStr));

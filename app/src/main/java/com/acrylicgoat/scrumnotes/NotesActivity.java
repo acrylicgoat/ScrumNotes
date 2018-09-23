@@ -35,7 +35,7 @@ public class NotesActivity extends Activity
         setContentView(R.layout.activity_notes);
         aBar = getActionBar();
         aBar.setTitle(getString(R.string.app_name));
-        note = (EditText) findViewById(R.id.editNotes);
+        note = findViewById(R.id.editNotes);
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
     }
@@ -56,7 +56,7 @@ public class NotesActivity extends Activity
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType(getString(R.string.mimetype_text));
 
-            if(noteStr != null && (!noteStr.equals("")))
+            if(!noteStr.equals(""))
             {
                 String today = ScrumNotesUtil.getTodaysDate();
                 intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.parking_lot_note) + " " + today);

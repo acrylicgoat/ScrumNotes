@@ -18,7 +18,7 @@ import com.acrylicgoat.scrumnotes.DataTableActivity;
 import com.acrylicgoat.scrumnotes.DevActivity;
 import com.acrylicgoat.scrumnotes.EventActivity;
 import com.acrylicgoat.scrumnotes.GoalsActivity;
-import com.acrylicgoat.scrumnotes.MainActivity;
+import com.acrylicgoat.scrumnotes.DevNotesActivity;
 import com.acrylicgoat.scrumnotes.NotesActivity;
 
 /**
@@ -51,7 +51,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
                 drawerLayout.closeDrawers();
                 break;
             case 1:
-                Intent mainIntent = new Intent(context, MainActivity.class);
+                Intent mainIntent = new Intent(context, DevNotesActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 context.startActivity(mainIntent);
                 drawerLayout.closeDrawers();
