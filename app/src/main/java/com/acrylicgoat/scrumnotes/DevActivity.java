@@ -129,13 +129,13 @@ public class DevActivity extends Activity
     
     private void setUI()
     {
-        ImageButton devSaveButton = (ImageButton)findViewById(R.id.devSave);
+        ImageButton devSaveButton = findViewById(R.id.devSave);
         devSaveButton.setOnClickListener(new OnClickListener() 
         {
                   
               public void onClick(View v) 
               {
-                  EditText devName = (EditText)findViewById(R.id.devName);
+                  EditText devName = findViewById(R.id.devName);
                   saveDeveloper(devName.getText().toString());
                   Developer dev = new Developer();
                   dev.setName(devName.getText().toString());
@@ -147,7 +147,7 @@ public class DevActivity extends Activity
                   
               }
           });
-        EditText devName = (EditText)findViewById(R.id.devName);
+        EditText devName = findViewById(R.id.devName);
         devName.setOnKeyListener(new View.OnKeyListener()
         {
             
@@ -156,11 +156,8 @@ public class DevActivity extends Activity
             {
                 if(event.getAction() == KeyEvent.ACTION_DOWN && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER))
                 {
-//                    if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)
-//                    {
-                        EditText devName = (EditText)findViewById(R.id.devName);
-                        saveDeveloper(devName.getText().toString());
-                    //}
+                    EditText devName = findViewById(R.id.devName);
+                    saveDeveloper(devName.getText().toString());
                 }
                 return false;
             }

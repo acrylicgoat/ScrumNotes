@@ -49,7 +49,7 @@ import android.view.View.OnClickListener;
  * Opening activity for app
  *
  */
-public class MainActivity extends Activity
+public class DevNotesActivity extends Activity
 {
     private Cursor cursor;
     private EditText today;
@@ -98,8 +98,8 @@ public class MainActivity extends Activity
             	
             }
         });
-        devName = (TextView) findViewById(R.id.devName);
-        ImageButton yesterday = (ImageButton)findViewById(R.id.calendarButton);
+        devName = findViewById(R.id.devName);
+        ImageButton yesterday = findViewById(R.id.calendarButton);
         yesterday.setOnClickListener(new OnClickListener() 
         {
 
@@ -112,8 +112,8 @@ public class MainActivity extends Activity
         });
 
         List<HashMap<String,String>> navTitles = ScrumNotesUtil.setNavDrawer(this);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerList = (ListView)findViewById(R.id.left_drawer);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerList = findViewById(R.id.left_drawer);
         SimpleAdapter sAdapter = new SimpleAdapter(this,navTitles, R.layout.nav_drawer,from,to);
 
         // Set the list's click listener
@@ -207,7 +207,7 @@ public class MainActivity extends Activity
         else
         {
             currentOwner=title;
-            //Log.d("MainActivity", "currentOwner = " + currentOwner);
+            //Log.d("DevNotesActivity", "currentOwner = " + currentOwner);
             getOwner(currentOwner);
         }
 
@@ -267,7 +267,7 @@ public class MainActivity extends Activity
     
     private void getOwner(String owner)
     {
-        //Log.d("MainActivity", "getOwner() called: " + owner);
+        //Log.d("DevNotesActivity", "getOwner() called: " + owner);
         getYesterday(owner);
         getToday(owner);
         devName.setText(currentOwner);
@@ -276,7 +276,7 @@ public class MainActivity extends Activity
     
     private String getYesterday(String owner)
     {
-        //Log.d("MainActivity", "getYesterday() called: " + owner);
+        //Log.d("DevNotesActivity", "getYesterday() called: " + owner);
         StringBuilder sb = new StringBuilder(103);
         String results = "";
         sb.append("select notes_note from notes where notes_owner='");
@@ -302,7 +302,7 @@ public class MainActivity extends Activity
         {
             cursor.moveToNext();
             int notesColumn = cursor.getColumnIndex(Notes.NOTE);
-            //Log.d("MainActivity.getYesterday()", "notesColumn: " + notesColumn);
+            //Log.d("DevNotesActivity.getYesterday()", "notesColumn: " + notesColumn);
             results = cursor.getString(notesColumn);
             
         }
@@ -314,7 +314,7 @@ public class MainActivity extends Activity
     
     private void getToday(String owner)
     {
-        //Log.d("MainActivity", "getToday() called: " + owner);
+        //Log.d("DevNotesActivity", "getToday() called: " + owner);
         
         DatabaseHelper dbHelper = new DatabaseHelper(this.getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -368,7 +368,7 @@ public class MainActivity extends Activity
         cursor = db.rawQuery(getTodaySQL(), null);
         if(cursor.getCount()>0)
         { 
-            //Log.d("MainActivity", "saveNote(): doing update ");
+            //Log.d("DevNotesActivity", "saveNote(): doing update ");
             StringBuilder sb = new StringBuilder(48);
             sb.append("update notes set notes_note = '");
             sb.append(ScrumNotesUtil.escape(text));

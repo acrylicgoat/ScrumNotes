@@ -43,8 +43,8 @@ public class ScrollingTable extends LinearLayout
         super.onLayout( changed, l, t, r, b );
         List<Integer> colWidths = new LinkedList<Integer>();
      
-        TableLayout header = (TableLayout) findViewById( R.id.HeaderTable );
-        TableLayout body = (TableLayout) findViewById( R.id.tablelayout );
+        TableLayout header = findViewById( R.id.HeaderTable );
+        TableLayout body = findViewById( R.id.tablelayout );
      
         for ( int rownum = 0; rownum < body.getChildCount(); rownum++ )
         {

@@ -30,27 +30,23 @@ public class ScrumNotesUtil
     {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         Date date = new Date();
-        String today = dateFormat.format(date);
+        return dateFormat.format(date);
         
-        return today;
     }
     
     public static String getFileDate()
     {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
         Date date = new Date();
-        String today = dateFormat.format(date);
+        return dateFormat.format(date);
         
-        return today;
     }
     
     public static String escape(String text)
     {
-        String returnVal = "";
+
+        return text.replace("'", "''");
         
-        returnVal = text.replace("'", "''");
-        
-        return returnVal;
     }
     public static ArrayList<HashMap<String,String>> setNavDrawer(Context context)
     {

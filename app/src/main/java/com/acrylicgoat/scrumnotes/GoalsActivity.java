@@ -46,24 +46,9 @@ public class GoalsActivity extends Activity
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
         goals = (EditText) findViewById(R.id.editGoals);
-        Display d = getWindowManager().getDefaultDisplay();
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int screenWidth = displaymetrics.widthPixels;
-        int screenHeight = displaymetrics.heightPixels;
-        if(isTabletDevice())
-        {
-            if(screenWidth < screenHeight)
-            {
-                //in portrait so give more lines
-                goals.setLines(200);
-            }
-            else
-            {
-                goals.setLines(50);
-            }
-                
-        }
+
+        goals.setLines(50);
+
         getGoals();
     }
 
@@ -130,7 +115,7 @@ public class GoalsActivity extends Activity
     
     private void getGoals()
     {
-        //Log.d("MainActivity", "getToday() called: " + owner);
+        //Log.d("DevNotesActivity", "getToday() called: " + owner);
         getCursor();
         if(cursor.getCount()>0)
         {
@@ -167,7 +152,7 @@ public class GoalsActivity extends Activity
         getCursor();
         if(cursor.getCount()>0)
         { 
-            //Log.d("MainActivity", "saveNote(): doing update ");
+            //Log.d("DevNotesActivity", "saveNote(): doing update ");
             StringBuilder sb = new StringBuilder(28);
             sb.append("update goals set goals_goal = '");
             sb.append(escape(goal));

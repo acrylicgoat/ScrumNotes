@@ -29,8 +29,7 @@ public class DevListAdapter extends ArrayAdapter<Developer>
     /** Current context */
     private Context context;
     private ArrayList<Developer> devList;
-    DevHolder holder;
-    
+
     public DevListAdapter(Context context, ArrayList <Developer> devList)
     {
         super(context, android.R.layout.simple_list_item_1, devList);
@@ -42,6 +41,7 @@ public class DevListAdapter extends ArrayAdapter<Developer>
     public View getView(int position, View convertView, ViewGroup parent) 
     {
         View v = convertView;
+        DevHolder holder;
         if (v == null) 
         {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
