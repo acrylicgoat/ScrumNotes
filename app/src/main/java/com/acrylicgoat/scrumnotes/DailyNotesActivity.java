@@ -53,23 +53,9 @@ public class DailyNotesActivity extends Activity
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
         note = findViewById(R.id.editDaily);
-        //DisplayMetrics displaymetrics = new DisplayMetrics();
-        //getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        //int screenWidth = displaymetrics.widthPixels;
-        //int screenHeight = displaymetrics.heightPixels;
-        //if(isTabletDevice())
-        //{
-        //    if(screenWidth < screenHeight)
-        //    {
-                //in portrait so give more lines
-        //        note.setLines(200);
-        //    }
-        //    else
-        //    {
-                note.setLines(50);
-        //    }
-                
-        //}
+
+        note.setLines(50);
+
         getNotes();
 
         List<HashMap<String,String>> navTitles = ScrumNotesUtil.setNavDrawer(this);

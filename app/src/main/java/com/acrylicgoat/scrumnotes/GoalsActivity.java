@@ -46,24 +46,9 @@ public class GoalsActivity extends Activity
         aBar.setDisplayHomeAsUpEnabled(true);
         aBar.setIcon(android.R.color.transparent);
         goals = (EditText) findViewById(R.id.editGoals);
-//        Display d = getWindowManager().getDefaultDisplay();
-//        DisplayMetrics displaymetrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-//        int screenWidth = displaymetrics.widthPixels;
-//        int screenHeight = displaymetrics.heightPixels;
-//        if(isTabletDevice())
-//        {
-//            if(screenWidth < screenHeight)
-//            {
-//                //in portrait so give more lines
-//                goals.setLines(200);
-//            }
-//            else
-//            {
-                goals.setLines(50);
-//            }
-//
-//        }
+
+        goals.setLines(50);
+
         getGoals();
     }
 
