@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white_text">#FFFFFF</color>
-    <color name="purple">#8F45DA</color>
-    <color name="light_purple">#b380e5</color>
-    
+    <color name="colorPrimary">#8F45DA</color>
+    <color name="colorPrimaryDark">#7027BB</color>
+    <!--<color name="colorAccent">#D81B60</color>-->
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans">#99FFFFFF</color>
 </resources>

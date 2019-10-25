@@ -1,40 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.acrylicgoat.scrumnotes"
-          android:versionCode="8"
-          android:versionName="1.7">
-
-    <uses-sdk
-            android:minSdkVersion="14"
-            android:targetSdkVersion="19"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+          package="com.acrylicgoat.scrumnotes">
 
     <application
-            android:icon="@drawable/ic_launcher"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
         <provider android:name="com.acrylicgoat.scrumnotes.provider.NotesProvider"
                   android:authorities="com.acrylicgoat.scrumnotes.provider.NotesProvider"/>
-        <provider android:name="com.acrylicgoat.scrumnotes.provider.DevelopersProvider"
-                  android:authorities="com.acrylicgoat.scrumnotes.provider.DevelopersProvider"/>
         <provider android:name="com.acrylicgoat.scrumnotes.provider.GoalsProvider"
                   android:authorities="com.acrylicgoat.scrumnotes.provider.GoalsProvider"/>
         <activity
-                android:name=".DailyNotesActivity"
-                android:label="@string/title_activity_main">
+                android:name=".activity.MainActivity"
+                android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".EventActivity" android:label="@string/title_activity_main"/>
-        <activity android:name=".NotesActivity" android:label="@string/title_activity_main"/>
-        <activity android:name=".DevActivity" android:label="@string/title_activity_main"
-                  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".DataTableActivity" android:label="@string/title_activity_main"
-                  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".GoalsActivity" android:label="@string/title_activity_main"/>
-        <activity android:name=".DevNotesActivity" android:label="@string/title_activity_main"/>
     </application>
 
 </manifest>

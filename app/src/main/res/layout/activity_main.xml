@@ -1,73 +1,45 @@
-<android.support.v4.widget.DrawerLayout
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawer_layout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/devName"
-            android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/calendarButton"
-            android:background="@color/white_text"
-            android:text="Developer"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/purple"
-            android:textSize="32sp" />
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+    </android.support.v7.widget.Toolbar>
 
-        <ImageButton
-            android:id="@+id/calendarButton"
-            android:layout_width="wrap_content"
+    <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="fill_horizontal"
-            android:layout_centerHorizontal="true"
-            android:background="@color/white_text"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/calendar" />
+            android:background="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"/>
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="fill_parent"
+    <android.support.design.widget.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/devName"
-            android:background="@color/purple"
-            android:text="@string/today"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white_text" />
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@color/bottom_nav_state"
+            app:itemTextColor="@color/bottom_nav_state"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu"/>
 
-        <EditText
-            android:id="@+id/editToday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView1"
-            android:ems="10"
-            android:gravity="top|left"
-            android:inputType="textCapSentences|textMultiLine"
-            android:lines="20"
-            android:singleLine="false" >
-
-
-        </EditText>
-
-
-
-    </RelativeLayout>
-    <ListView android:id="@+id/left_drawer"
-              android:layout_width="240dp"
-              android:layout_height="match_parent"
-              android:layout_gravity="start"
-              android:choiceMode="singleChoice"
-              android:divider="@android:color/transparent"
-              android:background="@color/purple"
-              android:dividerHeight="0dp"/>
-</android.support.v4.widget.DrawerLayout>
+</android.support.constraint.ConstraintLayout>
