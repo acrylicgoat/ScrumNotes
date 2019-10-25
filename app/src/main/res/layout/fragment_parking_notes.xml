@@ -18,7 +18,10 @@
                 android:gravity="top|left"
                 android:inputType="textCapSentences|textMultiLine"
                 android:lines="40"
-                android:singleLine="false" >
+                android:singleLine="false"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint">
 
             <requestFocus />
         </EditText>

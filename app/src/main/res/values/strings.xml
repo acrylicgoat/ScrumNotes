@@ -23,4 +23,5 @@
     <string name="tell_friend">Tell a friend about </string>
     <string name="no_data_msg">The note is empty, so nothing to share.</string>
     <string name="meeting_notes"> meeting notes.</string>
+    <string name="note_saved">Note saved</string>
 </resources>

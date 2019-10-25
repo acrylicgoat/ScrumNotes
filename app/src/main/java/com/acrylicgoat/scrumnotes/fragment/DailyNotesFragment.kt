@@ -28,8 +28,6 @@ class DailyNotesFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val activity = getActivity()
-
 
         return inflater.inflate(R.layout.fragment_dailynotes, container, false)
     }
@@ -111,6 +109,7 @@ class DailyNotesFragment : Fragment()
         }
         cursor!!.close()
         db.close()
+        Toast.makeText(view!!.context, getString(R.string.note_saved), Toast.LENGTH_SHORT).show()
 
     }
 }

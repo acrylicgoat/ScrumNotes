@@ -14,7 +14,10 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/event_title_hint"
                 android:gravity="top|start"
-                android:inputType="textCapSentences"/>
+                android:inputType="textCapSentences"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint"/>
         <requestFocus />
 
         <EditText
@@ -24,7 +27,10 @@
                 android:gravity="top|start"
                 android:hint="@string/event_desc_hint"
                 android:layout_weight="1"
-                android:inputType="textCapSentences|textMultiLine">
+                android:inputType="textCapSentences|textMultiLine"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint">
 
         </EditText>
 
