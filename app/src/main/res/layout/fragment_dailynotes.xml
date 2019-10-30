@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true">
+
+        <EditText
+                android:id="@+id/editDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/daily_notes_hint"
+                android:ems="10"
+                android:gravity="top|left"
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="115"
+                android:singleLine="false"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint"/>
+    </ScrollView>
+
+</RelativeLayout>

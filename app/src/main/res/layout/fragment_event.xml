@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+    <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="top">
+        <EditText
+                android:id="@+id/eventTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_title_hint"
+                android:gravity="top|start"
+                android:inputType="textCapSentences"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint"/>
+        <requestFocus />
+
+        <EditText
+                android:id="@+id/eventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:hint="@string/event_desc_hint"
+                android:layout_weight="1"
+                android:inputType="textCapSentences|textMultiLine"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_hint">
+
+        </EditText>
+
+    </LinearLayout>
+</RelativeLayout>
