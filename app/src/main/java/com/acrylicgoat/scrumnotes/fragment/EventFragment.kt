@@ -1,7 +1,7 @@
 package com.acrylicgoat.scrumnotes.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.widget.EditText
 import com.acrylicgoat.scrumnotes.R
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.widget.Toast
 import android.view.*
 
 
-class EventFragment : Fragment()
+class EventFragment : androidx.fragment.app.Fragment()
 {
 
     var title: EditText? = null
@@ -34,7 +34,7 @@ class EventFragment : Fragment()
         description = view?.findViewById(R.id.eventDescription);
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?){
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater){
         inflater?.inflate(R.menu.menu_event, menu)
     }
 

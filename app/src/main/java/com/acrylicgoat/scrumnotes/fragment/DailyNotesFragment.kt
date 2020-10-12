@@ -1,7 +1,7 @@
 package com.acrylicgoat.scrumnotes.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.acrylicgoat.scrumnotes.R
 import android.widget.EditText
 import android.widget.Toast
@@ -15,7 +15,7 @@ import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil
 
 
 
-class DailyNotesFragment : Fragment()
+class DailyNotesFragment : androidx.fragment.app.Fragment()
 {
     private var note: EditText? = null
     private var cursor: Cursor? = null
@@ -42,7 +42,7 @@ class DailyNotesFragment : Fragment()
         getNotes()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         inflater!!.inflate(R.menu.menu_dailynotes, menu)
 

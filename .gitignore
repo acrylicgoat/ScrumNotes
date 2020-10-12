@@ -18,3 +18,24 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+/.idea/*
+
+/.gradle
+
+*.iml
+
+app/build.gradle_old
+app/build/
+app/release/
+app/src/main/AndroidManifest.xml_old
+build/
+config/
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+keystore/
+settings.gradle
+app/app.iml
+

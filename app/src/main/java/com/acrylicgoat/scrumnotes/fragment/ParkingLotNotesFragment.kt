@@ -2,7 +2,7 @@ package com.acrylicgoat.scrumnotes.fragment
 
 import android.app.PendingIntent.getActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.*
 import android.widget.EditText
 import com.acrylicgoat.scrumnotes.R
@@ -12,7 +12,7 @@ import com.acrylicgoat.scrumnotes.util.ScrumNotesUtil
 
 
 
-class ParkingLotNotesFragment : Fragment()
+class ParkingLotNotesFragment : androidx.fragment.app.Fragment()
 {
 
     private var note: EditText? = null
@@ -38,7 +38,7 @@ class ParkingLotNotesFragment : Fragment()
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
         inflater!!.inflate(R.menu.menu_notes, menu)
 
